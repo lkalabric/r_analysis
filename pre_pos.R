@@ -20,10 +20,10 @@ library(ggpubr)
 getwd()
 
 #setwd("G:\\Meu Drive\\Inicia??o Cient?fica Mitermayer\\KAP\\Bancos de dados")
-setwd("C:\\Users\\kalabric\\Downloads")
+setwd("C:\\Users\\kalabric\\Downloads\\datasets")
 
 #An?lise explorat?ria dos dados----
-df.cap <- read.csv(file="InquritoCAPEsquistos-ResultadosDoInqurito_DATA_2023-03-21_1549.csv")
+df.cap <- read.csv(file="pre_pos.csv")
 View(df.cap)
 
 #Avaliando a estrutura do dataset
