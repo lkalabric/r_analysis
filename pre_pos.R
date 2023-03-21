@@ -1,7 +1,10 @@
-# Identifica??o ----
-#T?tulo: An?lise interina estudo CAP - Grupo Schisto
-#Autor: Vin?cius Raimundo
-#Data: 16/03/2023
+# Projeto: Schisto Urbano
+# Coordenador: Mitermayer G. Reis
+# Autor: Vinícius Raimundo & Luciano Kalabric
+# Data: 16/03/2023
+
+# Tipo de análise: Análise tipo pré e pós
+# Aplicação: Intervenção educativa e aplicação de um inquérito CAP
 
 #Pacotes e datasets ----
 install.packages("tidyverse")
