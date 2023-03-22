@@ -36,18 +36,19 @@ df.cap[cols] <- lapply(df.cap[cols], as.factor)
 
 str(df.cap)
 
-#Modificando os nomes de alguns fatores
+# Modificando os nomes de alguns fatores
 levels(df.cap$sexo) <- c("Homem", "Mulher")
 levels(df.cap$nat1) <- c("Salvador", "Outro")
+levels(df.cap$esc) <- c("Analfabeto/Fund1_incompleto", "Fund1_completo", "Fund2_completo", "Med_completo", "Sup_completo")
 
-#Transformando a categoria da vari?vel "NA DNO" em NA
+# Transformando a categoria da vari?vel "NA DNO" em NA
 
-#An?lise descritiva----
+# An?lise descritiva----
 
 summary(df.cap)
 sd(sub.df.cap$Idade)
 
-#Estat?stica descritiva----
+# Estat?stica descritiva----
 
 #30observa?oes
 
@@ -66,15 +67,21 @@ sd(sub.df.cap$Idade)
 #Analfabeto / Fundamental 1 Incompleto:7; M?dio Completo/Superior Incompleto :6; 
 # NSA/DN:2; Superior completo: 1
 
-#An?lises gr?ficas----
+# An?lises gr?ficas----
 
+## Exibir a tabela
+## Link: https://www.statology.org/str-function-in-r/
+str(df.cap)
 
-##Grafico pareado sem estratifica??o
+## Grafico pareado sem estratifica??o
 ggpaired(df.cap,cond1= "pre_total", cond2= "pos_total",ylab= "Resultado no question?rio CAP", xlab= "Momento de aplica??o", title= "Desempenho no question?rio CAP",fill= "condition",
          line.color = "red",line.size= 0.4,palette="jco")
 
-##Gr?fico pareados por sexo
-str(df.cap)
+## Gr?fico pareados por sexo
 ggpaired(df.cap,cond1= "pre_total", cond2= "pos_total",ylab= "Resultado no question?rio CAP", xlab= "Momento de aplica??o", title= "Desempenho no question?rio CAP",fill= "condition",
          line.color = "red",line.size= 0.4,palette="jco") + facet_wrap(~ sexo)
+
+## Gr?fico pareados por esc
+ggpaired(df.cap,cond1= "pre_total", cond2= "pos_total",ylab= "Resultado no question?rio CAP", xlab= "Momento de aplica??o", title= "Desempenho no question?rio CAP",fill= "condition",
+         line.color = "red",line.size= 0.4,palette="jco") + facet_wrap(~ esc)
 
