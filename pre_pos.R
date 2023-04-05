@@ -20,7 +20,10 @@ library(ggpubr)
 getwd()
 
 #setwd("G:\\Meu Drive\\Inicia??o Cient?fica Mitermayer\\KAP\\Bancos de dados")
-setwd("C:\\Users\\kalabric\\Downloads\\datasets")
+#setwd("C:\\Users\\kalabric\\Downloads")
+#setwd("C:\\Users\\kalabric\\OneDrive - FIOCRUZ\\Projetos\\2019 Kalabric & Camila - Schisto Pirajá\\Produção\\2023 Educação")
+#setwd("C:\\Users\\kalabric\\Documents\\GitHub\\r_analysis\\datasets")
+setwd("C:/Users/kalabric/Documents/GitHub/r_analysis/datasets")
 
 #An?lise explorat?ria dos dados----
 df.cap <- read.csv(file="pre_pos.csv")
