@@ -2,23 +2,37 @@
 # Autor: Luciano Kalabric
 # Data: 13/06/2023
 
-# Tipo de análise: Análise tipo pré e pós
-# Aplicação: Intervenção educativa e aplicação de um inquérito CAP
-
-#Pacotes e datasets ----
+# Installation from CRAN
 install.packages("fastqcr")
 
+# Or, install the latest version from GitHub:
+# if(!require(devtools)) install.packages("devtools")
+# devtools::install_github("kassambara/fastqcr")
+
+# Main
 library(fastqcr)
 
+# Environment preparation
 SAMPLE = '0001.1'
-#INPUT_DIR = paste('data/hbv/',SAMPLE,sep="")
-#OUTPUT_DIR = paste('qc-results/',SAMPLE,sep="")
 
-# Running in Windows
-setwd("C:/Users/kalabric/Downloads") # You only need to do this once
 
-INPUT_DIR = paste(getwd(),SAMPLE,sep="/")
-OUTPUT_DIR = paste(getwd(),'qc-results',SAMPLE,sep="/")
+# Set working directory in Linux
+setwd("~/") # You only need to do this once
+INPUT_DIR = paste('data/hbv/',SAMPLE,sep="")
+OUTPUT_DIR = paste('qc-results/',SAMPLE,sep="")
+
+# Set working directory in Windows
+#setwd("C:/Users/kalabric/Downloads") # You only need to do this once
+#INPUT_DIR = paste(getwd(),SAMPLE,sep="/")
+#OUTPUT_DIR = paste(getwd(),'qc-results',SAMPLE,sep="/")
+
+
+# Run FastQC to generation FastQC Reports 
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fastqc(fq.dir = INPUT_DIR, # FASTQ files directory
+       qc.dir = OUTPUT_DIR, # Results direcory
+       threads = 4                    # Number of threads
+)
 
 # Aggregating Multiple FastQC Reports into a Data Frame 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
