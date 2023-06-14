@@ -1,6 +1,12 @@
+
+# command: fastqcr-analysis.R
 # Projeto: Bioinfo
 # Autor: Luciano Kalabric
 # Data: 13/06/2023
+# Link: https://linuxconfig.org/running-gnu-r-on-linux-operating-system
+
+# Run this R script in Linux
+# $ R CMD BATCH r-example-function-1.R
 
 # Installation from CRAN
 install.packages("fastqcr")
