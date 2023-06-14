@@ -1,8 +1,24 @@
+# Projeto: Bioinfo
+# Autor: Luciano Kalabric
+# Data: 13/06/2023
+
+# Tipo de análise: Análise tipo pré e pós
+# Aplicação: Intervenção educativa e aplicação de um inquérito CAP
+
+#Pacotes e datasets ----
+install.packages("fastqcr")
+
 library(fastqcr)
 
 SAMPLE = '0001.1'
-INPUT_DIR = paste('data/hbv/',SAMPLE)
-OUTPUT_DIR = paste('qc-results/',SAMPLE)
+#INPUT_DIR = paste('data/hbv/',SAMPLE,sep="")
+#OUTPUT_DIR = paste('qc-results/',SAMPLE,sep="")
+
+# Running in Windows
+setwd("C:/Users/kalabric/Downloads") # You only need to do this once
+
+INPUT_DIR = paste(getwd(),SAMPLE,sep="/")
+OUTPUT_DIR = paste(getwd(),'qc-results',SAMPLE,sep="/")
 
 # Aggregating Multiple FastQC Reports into a Data Frame 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
