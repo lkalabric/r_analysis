@@ -3,7 +3,6 @@
 # Script Get API data 
 # Link: https://www.dataquest.io/blog/r-api-tutorial/
 
-
 # Instala as biblioteca básicas para conexão API no R
 install.packages(c("httr", "jsonlite"))inst
 
