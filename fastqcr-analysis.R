@@ -36,8 +36,8 @@ OUTPUT_DIR = paste('qc-results/',SAMPLE,sep="")
 # Run FastQC to generation FastQC Reports 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fastqc(fq.dir = INPUT_DIR, # FASTQ files directory
-       qc.dir = OUTPUT_DIR, # Results direcory
-       threads = 4                    # Number of threads
+       qc.dir = OUTPUT_DIR, # Results directory
+#       threads = 4                    # Number of threads
 )
 
 # Aggregating Multiple FastQC Reports into a Data Frame 
