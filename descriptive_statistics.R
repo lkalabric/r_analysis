@@ -1,4 +1,4 @@
-# Estatística descritiva de dados provenientes de um arquivo .csv
+# Estatística descritiva para análise de dados provenientes de um arquivo .csv
 
 # Trabalhando com tabelas em R
 
