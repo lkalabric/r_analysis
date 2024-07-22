@@ -1,14 +1,13 @@
-# Estatística descritiva para análise de dados provenientes de um arquivo .csv
+# Estatística descritiva para análise de dados
 
-# Trabalhando com tabelas em R
+# Trabalhando com arquivos .csv em R
 
-# Carrega os dados de um arquivo .csv
+# Carregando os dados de um arquivo .csv
 library(readr)
-#Tabela_1 <- read_csv("C:/Users/kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - SA2018.csv")
-Tabela_1 <- read_csv("C:/Users/kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
-Tabela_2 <- read.csv("C:/Users/luciano.kalabric/Downloads/EsquistossomoseUrban-RelatrioFinalCoorteT_DATA_2024-07-22_1447.csv")
-# Para confirmar a classe de uam variável
+#Tabela_1 <- read_csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - SA2018.csv")
+Tabela_1 <- read_csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
 
+# Para confirmar a classe de uam variável
 class(Tabela_1)
 
 # Frequencia de uma variável qualitativa ou categórica
@@ -57,6 +56,25 @@ chisq.test(stu_data)
 
 # Análise Urban Schisto
 # Dados SB2024
+Tabela_2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Dados da pesquisa/2024 SB Relatório final coorte Tulane-IRB & CEP-IGM.csv")
+id_corte<-3000
+
+# Dados SA2019
+Tabela_2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Dados da pesquisa/2019 SA Relatório final coorte Tulane-IRB & CEP-IGM.csv")
+id_corte<-4000
+
+# Dados SA2023
+Tabela_2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Dados da pesquisa/2023 SA Relatório final coorte Tulane-IRB & CEP-IGM.csv")
+id_corte<-5000
+
+# Dados PI2021
+Tabela_2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Dados da pesquisa/2021 PI Relatório final coorte Tulane-IRB & CEP-IGM.csv")
+id_corte<-3000
+
+# Dados PI2021
+Tabela_2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Dados da pesquisa/2023 PI Relatório final coorte Tulane-IRB & CEP-IGM.csv")
+id_corte<-4000
+
 # Prev
 sm_prev <- table(Tabela_2$sm)
 sm_prev
@@ -64,19 +82,17 @@ mean(Tabela_2$smovosq, na.rm = TRUE)
 sd(Tabela_2$smovosq, na.rm = TRUE)
 exp(mean(log(Tabela_2$smovosq), na.rm = TRUE))
 # Coorte
-coorte<-subset(Tabela_2, id<3000)
-sm_coorte<-table(coorte$sm)
+coorte <- subset(Tabela_2, id<id_corte)
+sm_coorte <- table(coorte$sm)
 sm_coorte
 mean(coorte$smovosq, na.rm = TRUE)
 sd(coorte$smovosq, na.rm = TRUE)
 exp(mean(log(coorte$smovosq), na.rm = TRUE))
 # Novos
-novos<-subset(Tabela_2, id>=3000)
-sm_novos<-table(novos$sm)
+novos <- subset(Tabela_2, id>=id_corte)
+sm_novos <- table(novos$sm)
 sm_novos
 mean(novos$smovosq, na.rm = TRUE)
 sd(novos$smovosq, na.rm = TRUE)
 exp(mean(log(novos$smovosq), na.rm = TRUE))
-
-
 
