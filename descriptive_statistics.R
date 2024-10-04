@@ -23,7 +23,7 @@ library(ggpubr)
 #tabela1 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - PI2019.csv")
 #tabela1 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - LP2022.csv")
 #tabela1 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - BF2023.csv")
-tabela1 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 2 - All.csv")
+tabela1 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
 
 # Para confirmar a classe de uma variável
 class(tabela1)
@@ -77,7 +77,7 @@ exp(mean(log(sm_idade_maior30$smovosq), na.rm = TRUE))
 ### Análise Urban Schisto - Tabela 2
 ###
 # Carregando os dados de um arquivo .csv
-tabela2 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 2 - All.csv")
+tabela2 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
 
 # Frequencia de uma variável qualitativa ou categórica - Exemplo
 participants_study <- table(tabela2$study)
@@ -253,7 +253,7 @@ sd(novos$smovosqmedia, na.rm = TRUE)
 exp(mean(log(novos$smovosqmedia), na.rm = TRUE))
 
 # Figura 1
-figura1 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 2 - All.csv")
+figura1 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
 sm_by_studygroup <- subset(figura1, study=="BF2023", select=c(idade, sexo, sm, sm_prev))
 sm_by_studygroup$faixaetaria <- NA
 
