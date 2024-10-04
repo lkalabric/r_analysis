@@ -77,7 +77,7 @@ exp(mean(log(sm_idade_maior30$smovosq), na.rm = TRUE))
 ### Análise Urban Schisto - Tabela 2
 ###
 # Carregando os dados de um arquivo .csv
-tabela2 <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
+tabela2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
 
 # Frequencia de uma variável qualitativa ou categórica - Exemplo
 participants_study <- table(tabela2$study)
