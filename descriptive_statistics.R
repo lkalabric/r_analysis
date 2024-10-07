@@ -94,16 +94,16 @@ chisq.test(stu_data)
 stu_data = table(tabela2$nat1,tabela2$sm_prev)    # Inclui os resultados dos pilotos
 print(stu_data)
 chisq.test(stu_data)
-stu_data = table(tabela2$resdoutr1,tabela2$sm_prev)    # Inclui os resultados dos pilotos
+stu_data = table(tabela2$resdoutr1,tabela2$sm_prev)     # Inclui os resultados dos pilotos
 print(stu_data)
 chisq.test(stu_data)
-stu_data = table(tabela2$viaj1,tabela2$sm_prev)    # Inclui os resultados dos pilotos
+stu_data = table(tabela2$viaj1,tabela2$sm_prev)         # Inclui os resultados dos pilotos
 print(stu_data)
 # Calcular o chi-quadrado no EpiInfo
-stu_data = table(tabela2$agua_ind,tabela2$sm_prev)    # Inclui os resultados dos pilotos
+stu_data = table(tabela2$agua_ind,tabela2$sm_prev)      # Inclui os resultados dos pilotos
 print(stu_data)
 # Calcular o chi-quadrado no EpiInfo
-stu_data = table(tabela2$banheiro_ind,tabela2$sm_prev)    # Inclui os resultados dos pilotos
+stu_data = table(tabela2$banheiro_ind,tabela2$sm_prev)  # Inclui os resultados dos pilotos
 print(stu_data)
 # Calcular o chi-quadrado no EpiInfo
 stu_data = table(tabela2$esgoto_ind,tabela2$sm_prev)    # Inclui os resultados dos pilotos
