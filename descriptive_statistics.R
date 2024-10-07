@@ -1,6 +1,6 @@
 # Estatística descritiva para análise de dados
-
 # Trabalhando com arquivos .csv em R
+# Autor: Luciano K. Silva
 
 # Preparação do ambiente
 list.of.packages <- c("dplyr", "readr", "ggpubr")
