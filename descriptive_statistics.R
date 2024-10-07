@@ -7,10 +7,9 @@ list.of.packages <- c("dplyr", "readr", "ggpubr")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
-# "dplyr" é um pacote para transformação de dados e "readr" para leitura de dados de arquivos delimitados
-library(dplyr)
-library(readr)
-library(ggpubr)
+library(dplyr)  # "dplyr" é um pacote para transformação de dados
+library(readr)  # "readr" para leitura de dados de arquivos delimitados
+library(ggpubr) # plota gráficos diversos
 
 ###
 ### Análise Urban Schisto - Tabela 1
