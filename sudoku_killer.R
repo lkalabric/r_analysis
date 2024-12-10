@@ -1,7 +1,7 @@
 # Objetivo: Calcular as possiveis solucoes para a soma dos algarismos de um numero
 
 # Define a variavel soma
-s <- 22
+s <- 18
 
 # Definindo a variável a que corresponde ao numero de algarismos de um numero inteiro j
 a <- 4
