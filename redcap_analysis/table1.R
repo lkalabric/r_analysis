@@ -1,8 +1,18 @@
+# Install required packages
+
+# Install libraries if not installed
+
+list.of.packages <- c("shiny", "bslib", "ggplot2")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+
 # Load packages
 
 library(shiny)
 library(bslib)
 library(ggplot2)
+
 
 # Get the data
 
