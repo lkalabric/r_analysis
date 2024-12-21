@@ -1,0 +1,138 @@
+---
+title: "Shiny Basics"
+author: "Luciano Kalabric"
+date: "2024-12-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Shiny Basics
+# Link https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/
+
+Installation
+Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R. This lesson will get you started building Shiny apps right away.
+
+If you still haven’t installed the Shiny package, open an R session, connect to the internet, and run
+
+```{r, include=FALSE}
+# Install libraries if not installed
+list.of.packages <- c("shiny")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+Shiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.
+
+The Shiny package has eleven built-in examples that each demonstrate how Shiny works. Each example is a self-contained Shiny app.
+
+The Hello Shiny example plots a histogram of R’s faithful dataset with a configurable number of bins. Users can change the number of bins with a slider bar, and the app will immediately respond to their input. You’ll use Hello Shiny to explore the structure of a Shiny app and to create your first app.
+
+To run Hello Shiny, type:
+```{r, include=FALSE}
+library(shiny)
+runExample("01_hello")
+```
+
+Structure of a Shiny App
+Shiny apps are contained in a single script called app.R. The script app.R lives in a directory (for example, newdir/) and the app can be run with runApp("newdir").
+
+app.R has three components:
+
+- a user interface object
+- a server function
+- a call to the shinyApp function
+
+The user interface (ui) object controls the layout and appearance of your app. The server function contains the instructions that your computer needs to build your app. Finally the shinyApp function creates Shiny app objects from an explicit UI/server pair.
+
+ui
+Here is the ui object for the Hello Shiny example.
+```{r, include=FALSE}
+library(shiny)
+library(bslib)
+
+# Define UI for app that draws a histogram ----
+ui <- page_sidebar(
+  # App title ----
+  title = "Hello Shiny!",
+  # Sidebar panel for inputs ----
+  sidebar = sidebar(
+    # Input: Slider for the number of bins ----
+    sliderInput(
+      inputId = "bins",
+      label = "Number of bins:",
+      min = 1,
+      max = 50,
+      value = 30
+    )
+  ),
+  # Output: Histogram ----
+  plotOutput(outputId = "distPlot")
+)
+```
+
+server
+Here is the server function for the Hello Shiny example.
+```{r}
+# Define server logic required to draw a histogram ----
+server <- function(input, output) {
+
+  # Histogram of the Old Faithful Geyser Data ----
+  # with requested number of bins
+  # This expression that generates a histogram is wrapped in a call
+  # to renderPlot to indicate that:
+  #
+  # 1. It is "reactive" and therefore should be automatically
+  #    re-executed when inputs (input$bins) change
+  # 2. Its output type is a plot
+  output$distPlot <- renderPlot({
+
+    x    <- faithful$waiting
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    hist(x, breaks = bins, col = "#007bc2", border = "white",
+         xlab = "Waiting time to next eruption (in mins)",
+         main = "Histogram of waiting times")
+
+    })
+
+}
+```
+
+At one level, the Hello Shiny server function is very simple. The script does some calculations and then plots a histogram with the requested number of bins.
+
+However, you’ll also notice that most of the script is wrapped in a call to renderPlot. The comment above the function explains a bit about this, but if you find it confusing, don’t worry. We’ll cover this concept in much more detail soon.
+
+Play with the Hello Shiny app and review the source code. Try to develop a feel for how the app works. But before you do so, note that in your app.R file you will need to start with loading the Shiny package and end with a call to shinyApp:
+```{r}
+library(shiny)
+
+# See above for the definitions of ui and server
+ui <- ...
+
+server <- ...
+
+shinyApp(ui = ui, server = server)
+```
+
