@@ -8,27 +8,6 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
 ## Shiny Basics
 # Link https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/
 
@@ -36,20 +15,22 @@ Installation
 Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R. This lesson will get you started building Shiny apps right away.
 
 If you still haven’t installed the Shiny package, open an R session, connect to the internet, and run
+Shiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.
 
 ```{r, include=FALSE}
 # Install libraries if not installed
-list.of.packages <- c("shiny")
+list.of.packages <- c("shiny", "bslib")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
-Shiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 The Shiny package has eleven built-in examples that each demonstrate how Shiny works. Each example is a self-contained Shiny app.
 
 The Hello Shiny example plots a histogram of R’s faithful dataset with a configurable number of bins. Users can change the number of bins with a slider bar, and the app will immediately respond to their input. You’ll use Hello Shiny to explore the structure of a Shiny app and to create your first app.
 
-To run Hello Shiny, type:
+To run Hello Shiny directly, type:
 ```{r, include=FALSE}
 library(shiny)
 runExample("01_hello")
@@ -59,16 +40,16 @@ Structure of a Shiny App
 Shiny apps are contained in a single script called app.R. The script app.R lives in a directory (for example, newdir/) and the app can be run with runApp("newdir").
 
 app.R has three components:
-
 - a user interface object
 - a server function
 - a call to the shinyApp function
 
 The user interface (ui) object controls the layout and appearance of your app. The server function contains the instructions that your computer needs to build your app. Finally the shinyApp function creates Shiny app objects from an explicit UI/server pair.
 
-ui
+# ui
+
 Here is the ui object for the Hello Shiny example.
-```{r, include=FALSE}
+```{r ui, include=FALSE}
 library(shiny)
 library(bslib)
 
@@ -91,10 +72,10 @@ ui <- page_sidebar(
   plotOutput(outputId = "distPlot")
 )
 ```
+# server
 
-server
 Here is the server function for the Hello Shiny example.
-```{r}
+```{r server, include=FALSE}
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
 
@@ -125,7 +106,8 @@ At one level, the Hello Shiny server function is very simple. The script does so
 However, you’ll also notice that most of the script is wrapped in a call to renderPlot. The comment above the function explains a bit about this, but if you find it confusing, don’t worry. We’ll cover this concept in much more detail soon.
 
 Play with the Hello Shiny app and review the source code. Try to develop a feel for how the app works. But before you do so, note that in your app.R file you will need to start with loading the Shiny package and end with a call to shinyApp:
-```{r}
+
+```{r shinyapp, include=FALSE}
 library(shiny)
 
 # See above for the definitions of ui and server
@@ -134,5 +116,14 @@ ui <- ...
 server <- ...
 
 shinyApp(ui = ui, server = server)
+```
+
+Every Shiny app has the same structure: an app.R file that contains ui and server. You can create a Shiny app by making a new directory and saving an app.R file inside it. It is recommended that each app will live in its own unique directory.
+
+You can run a Shiny app by giving the name of its directory to the function runApp. For example if your Shiny app is in a directory called my_app, run it with the following code:
+
+```{r}
+setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/redcap_analysis")
+runApp("app-teste.R")
 ```
 
