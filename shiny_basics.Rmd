@@ -33,7 +33,17 @@ The Hello Shiny example plots a histogram of R’s faithful dataset with a confi
 To run Hello Shiny directly, type:
 ```{r, include=FALSE}
 library(shiny)
-runExample("01_hello")
+runExample("01_hello")      # a histogram
+runExample("02_text")       # tables and data frames
+runExample("03_reactivity") # a reactive expression
+runExample("04_mpg")        # global variables
+runExample("05_sliders")    # slider bars
+runExample("06_tabsets")    # tabbed panels
+runExample("07_widgets")    # help text and submit buttons
+runExample("08_html")       # Shiny app built from HTML
+runExample("09_upload")     # file upload wizard
+runExample("10_download")   # file download wizard
+runExample("11_timer")      # an automated timer
 ```
 
 Structure of a Shiny App
@@ -125,5 +135,17 @@ You can run a Shiny app by giving the name of its directory to the function runA
 ```{r}
 setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/redcap_analysis")
 runApp("app-teste.R")
+```
+runGitHub
+If you don’t have your own web page to host the files at, you can host your the files for free at www.github.com.
+
+GitHub is a popular project hosting site for R developers since it does more than just host files. GitHub provides many features to support collaboration, such as issue trackers, wikis, and close integration with the git version control system. To use GitHub, you’ll need to sign up (it’s free) and choose a user name.
+
+To share an app through GitHub, create a project repository on GitHub. Then store your app.R file in the repository, along with any supplementary files that the app uses.
+
+Your users can launch your app by running:
+
+```{r}
+runGitHub( "r_analysis", "lkalabric")
 ```
 
