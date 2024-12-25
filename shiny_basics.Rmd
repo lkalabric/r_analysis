@@ -17,7 +17,7 @@ Shiny is an R package that makes it easy to build interactive web applications (
 If you still haven’t installed the Shiny package, open an R session, connect to the internet, and run
 Shiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.
 
-```{r, include=FALSE}
+```{r shiny_installation, include=FALSE}
 # Install libraries if not installed
 list.of.packages <- c("shiny", "bslib")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
