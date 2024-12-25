@@ -27,7 +27,8 @@ print(result)
 # Export records to R
 install.packages("RCurl")
 
-source('config.R')
+setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis")
+source("config.R")
 library(RCurl)
 result <- postForm(
     api_url,
