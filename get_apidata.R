@@ -12,7 +12,7 @@ library(jsonlite)
 
 # API Playground REDCap
 #!/usr/bin/env Rscript
-token <- "699E1CDF364CFD8E4F0E2CFBBBB0F9E2"
+token <- "39169DDCCC39AED2489284B828E0A65A"
 url <- "https://bdp.bahia.fiocruz.br/api/"
 formData <- list("token"=token,
     content='project',

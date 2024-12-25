@@ -133,8 +133,9 @@ Every Shiny app has the same structure: an app.R file that contains ui and serve
 You can run a Shiny app by giving the name of its directory to the function runApp. For example if your Shiny app is in a directory called my_app, run it with the following code:
 
 ```{r, include=FALSE}
-setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/redcap_analysis")
-runApp("app-teste.R")
+library(shiny)
+setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/my_app/")
+runApp("app.R")
 ```
 runGitHub
 If you don’t have your own web page to host the files at, you can host your the files for free at www.github.com.
