@@ -1,12 +1,12 @@
-# Objetivo: Calcular as possiveis soluções para a soma dos algarismos de um numero
+# Objetivo: Identificar todos os números com (a) algarismos que produzem uma soma (s) conhecida
 
-# Define a variavel soma
+# Define a variável soma
 s <- 10
 
 # Definindo a variável a que corresponde ao numero de algarismos de um numero inteiro j
 a <- 2
 
-print(paste("Soma:", s, "Numero de algaritimos: ", a))
+print(paste("Soma:", s, "Numero de algarismos: ", a))
 
 # Possiveis algarismos
 algarismos <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
@@ -14,18 +14,15 @@ algarismos <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
 # Lista de solucoes
 solucoes <- c()
 
-j_min <- 0
-# Loop para criar um numero minimo formado por "a" algarismos que nao se repetem
-for (j in 1:a) {
-    j_min <- j_min + algarismos[j]*10^(a-j)
-}
+# Definição do universo amostral
+j_min <- algarismos[1:a]              # Seleciona os "a" primeiros elementos do vetor algarismos
+j_min <- paste(j_min, collapse = "")  # Colapsando as strings em uma única string
+j_min <- as.numeric(j_min)            # Convertendo a string de volta para um número
 print(j_min)
 
-j_max<-0
-# Loop para criar um numero maximo formado por "a" algarismos que nao se repetem
-for (j in 1:a) {
-  j_max <- j_max + algarismos[length(algarismos)+1-j]*10^(a-j)
-}
+j_max <- rev(algarismos[(length(algarismos)-(a-1)):length(algarismos)]) # Seleciona os "a" últimos elementos do vetor algarismos
+j_max <- paste(j_max, collapse = "")  # Colapsando as strings em uma única string
+j_max <- as.numeric(j_max)            # Convertendo a string de volta para um número
 print(j_max)
 
 n_solucoes <- 0
