@@ -1,0 +1,57 @@
+---
+title: "curvaROC"
+author: "Luciano K. Silva"
+date: "2025-01-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+Este é um documento R Markdown. Markdown é uma sintaxe de formatação simples para criação de documentos HTML, PDF e MS Word. Para mais detalhes sobre o uso do R Markdown, consulte <http://rmarkdown.rstudio.com>.
+
+Ao clicar no botão **Knit**, um documento será gerado, incluindo tanto o conteúdo quanto a saída de quaisquer pedaços de código R incorporados no documento. Você pode incorporar um pedaço de código R assim:
+
+```{r libraries}
+# Instala os pacotes requeridos para o script
+list.of.packages <- c("pROC", "dplyr", "readr", "ggpubr")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+```
+Carregando os dados...
+
+```{r dados}
+# Carregando os dados de um arquivo .csv
+nano1 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/Análise validação dos métodos moleculares 20250113 BF.csv")
+
+# Para confirmar a classe de uma variável
+# View(nano1)
+class(nano1)
+```
+
+
+Prompt Gemini:
+Criar o código fonte na linguagem de programação R para analisar o dataframe "nano1" que contem as seguintes variáveis: "A260.media", com números inteiros, e "controle", sendo "positivo" ou "negativo".  E, realizar a análise da curva ROC.
+
+Código gerado:
+
+```{r libraries}
+
+# Carrega os pacotes instalados 
+library(pROC)  # Mostra e analisa curvas ROC
+
+# Supondo que seu dataframe 'nano1' já esteja carregado
+
+# Criando a curva ROC
+roc_obj <- roc(nano1$controle, nano1$A260.media, levels = c("negativo", "positivo"))
+
+# Plotando a curva ROC
+plot(roc_obj, print.auc = TRUE, col = "blue")
+
+# Calculando a área sob a curva (AUC)
+auc(roc_obj)
+```
