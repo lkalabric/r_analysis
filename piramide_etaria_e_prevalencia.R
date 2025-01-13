@@ -4,7 +4,7 @@
 # Objetivo: Plotar um gráfico de pirâmide etária
 
 # Configurando o diretório de trabalho
-setwd("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis")
+setwd("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
 
 # Instalando bibliotecas necessários
 list.of.packages <- c("ggplot2", "tidyverse", "dplyr")
@@ -131,3 +131,4 @@ ggplot(prevalencia_por_agrupamento, aes(x = faixa_etaria, y = proporcao, fill = 
   labs(x = "Age group", y = "SM prevalence (%)", fill = "Sex") +
   facet_wrap(~ study) +
   theme_minimal()
+
