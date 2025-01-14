@@ -23,7 +23,11 @@ getwd()
 #setwd("C:\\Users\\kalabric\\Downloads")
 #setwd("C:\\Users\\kalabric\\OneDrive - FIOCRUZ\\Projetos\\2019 Kalabric & Camila - Schisto Pirajá\\Produção\\2023 Educação")
 #setwd("C:/Users/kalabric/Documents/GitHub/r_analysis/datasets")
+# Carregando os dados do laptop Asus
 setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
+
+# Carregando os dados do desktop Fiocruz
+setwd("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
 
 #An?lise explorat?ria dos dados----
 df.cap <- read.csv(file="pre_pos.csv")
