@@ -1,0 +1,101 @@
+amostra;controle;a260_1;a260_a280_1;a260_2;a260_a280_2;extracao;pcr_sch111;qpcr_sch111;pcr_sch121;qpcr_sch121;a260_media;a260_a280_media
+CP.1;positivo;333,4;1,91;298,6;1,94;DNAZol;;;;;316,0;1,925
+CP.2;positivo;106,9;1,98;102,6;2,01;DNAZol;;;;;104,8;1,995
+CP.3;positivo;246;1,92;243,1;1,91;DNAZol;;;;;244,6;1,915
+CP.4;positivo;34,7;2,43;34;2,46;DNAZol;;;;;34,4;2,445
+CP.5;positivo;385,3;1,98;412,9;2,02;DNAZol;;;;;399,1;2
+CP.6;positivo;61,4;1,96;61,1;1,96;DNAZol;;;;;61,3;1,96
+CP.7;positivo;52,6;2,1;52,9;2,09;DNAZol;;;;;52,8;2,095
+CP.8;positivo;247,6;1,96;249,6;1,96;DNAZol;;;;;248,6;1,96
+CP.9;positivo;202,4;1,88;209,6;1,86;DNAZol;;;;;206,0;1,87
+CP.10;positivo;200,4;1,96;205,1;1,98;DNAZol;;;;;202,8;1,97
+CP.11;positivo;605;1,91;624,4;1,91;DNAZol;;;;;614,7;1,91
+CP.12;positivo;6,6;3,12;6,8;2,97;DNAZol;;;;;6,7;3,045
+CP.13;positivo;51,7;1,98;63,7;1,85;DNAZol;;;;;57,7;1,915
+CP.14;positivo;18,4;2,47;NA;NA;DNAZol;;;;;18,4;2,47
+CP.15;positivo;54;2,08;60,4;2,05;DNAZol;;;;;57,2;2,065
+CP.16;positivo;14,1;2,5;14,2;2,48;DNAZol;;;;;14,2;2,49
+CP.17;positivo;4,2;3,33;4,4;3,2;DNAZol;;;;;4,3;3,265
+CP.18;positivo;3,3;3,7;3,6;3,47;DNAZol;;;;;3,5;3,585
+CP.19;positivo;9,4;2,62;9,6;2,6;DNAZol;;;;;9,5;2,61
+CP.20;positivo;127,2;2,02;131,5;2,02;DNAZol;;;;;129,4;2,02
+CP.21;positivo;14,3;2,3;15;2,26;DNAZol;;;;;14,7;2,28
+CP.22;positivo;772,5;1,86;774,9;1,86;DNAZol;;;;;773,7;1,86
+CP.23;positivo;98,2;2,01;105,5;2,01;DNAZol;;;;;101,9;2,01
+CP.24;positivo;30,5;2,25;31,2;2,25;DNAZol;;;;;30,9;2,25
+CP.25;positivo;58,2;2,16;60,8;2,15;DNAZol;;;;;59,5;2,155
+CP.26;positivo;37,3;2,17;36,4;2,18;DNAZol;;;;;36,9;2,175
+CP.27;positivo;55,7;2,11;60,1;2,1;DNAZol;;;;;57,9;2,105
+CP.28;positivo;22,2;2,05;23,4;2,03;DNAZol;;;;;22,8;2,04
+CN.1;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.2;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.3;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.4;negativo;298,9;1,94;310,1;1,96;DNAZol;;;;;304,5;1,95
+CN.5;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.6;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.7;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.8;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.9;negativo;64,2;2,36;67,3;2,34;DNAZol;;;;;65,8;2,35
+CN.10;negativo;63,9;2,42;72;2,38;DNAZol;;;;;68,0;2,4
+CN.11;negativo;690,4;1,96;NA;NA;DNAZol;;;;;690,4;1,96
+CN.12;negativo;NA;NA;NA;NA;DNAZol;;;;;;
+CN.13;negativo;819,4;1,74;864,9;1,75;DNAZol;;;;;842,2;1,745
+CN.14;negativo;452;1,97;NA ;NA ;DNAZol;;;;;452,0;1,97
+CN.15;negativo;20,1;2,49;20;2,49;DNAZol;;;;;20,1;2,49
+49.1;campo;397,5;1,99;394,4;1,99;DNAZol;;;;;396,0;1,99
+49.2;campo;13,1;2,87;16,2;2,68;DNAZol;;;;;14,7;2,775
+49.3;campo;67,2;2,17;68,2;2,16;DNAZol;;;;;67,7;2,165
+49.4;campo;306,2;1,99;NA ;NA ;DNAZol;;;;;306,2;1,99
+49.5;campo;25,3;2,34;25,6;2,34;DNAZol;;;;;25,5;2,34
+49.6;campo;269,8;1,91;273,8;1,9;DNAZol;;;;;271,8;1,905
+49.7;campo;485,3;1,98;NA ;NA ;DNAZol;;;;;485,3;1,98
+49.8;campo;35,2;2,16;35,9;2,16;DNAZol;;;;;35,6;2,16
+49.9;campo;75,4;2,09;81,2;2,08;DNAZol;;;;;78,3;2,085
+49.10;campo;122,2;2,09;123,3;2,08;DNAZol;;;;;122,8;2,085
+49.11;campo;159,1;2,06;170,8;2,06;DNAZol;;;;;165,0;2,06
+49.12;campo;820,2;1,92;869,7;1,92;DNAZol;;;;;845,0;1,92
+38.1;campo;216,5;2,08;NA;NA;DNAZol;;;;;216,5;2,08
+38.2;campo;85,6;2,1;86,7;2,08;DNAZol;;;;;86,2;2,09
+38.3;campo;38,8;2,16;44;2,15;DNAZol;;;;;41,4;2,155
+38.4;campo;69,6;2,11;77,3;2,08;DNAZol;;;;;73,5;2,095
+38.5;campo;236,8;2,05;278,4;2,09;DNAZol;;;;;257,6;2,07
+38.6;campo;249,3;1,95;269,4;1,96;DNAZol;;;;;259,4;1,955
+38.7;campo;72,6;2,08;66,9;2,08;DNAZol;;;;;69,8;2,08
+38.8;campo;542,2;1,89;565,4;1,87;DNAZol;;;;;553,8;1,88
+38.9;campo;162,3;2,05;164,3;2,04;DNAZol;;;;;163,3;2,045
+38.10;campo;313,8;2,03;776,2;1,97;DNAZol;;;;;545,0;2
+38.11;campo;95,4;2,12;103,7;2,11;DNAZol;;;;;99,6;2,115
+38.12;campo;199;2;222,2;2;DNAZol;;;;;210,6;2
+57.1;campo;547,7;1,98;572,3;1,98;DNAZol;;;;;560,0;1,98
+57.2;campo;677,7;2,01;NA ;NA ;DNAZol;;;;;677,7;2,01
+57.3;campo;1080,9;1,96;NA ;NA ;DNAZol;;;;;1080,9;1,96
+57.4;campo;1299;1,95;NA ;NA ;DNAZol;;;;;1299,0;1,95
+57.5;campo;1017,7;1,72;NA ;NA ;DNAZol;;;;;1017,7;1,72
+57.6;campo;NA;NA;NA ;NA ;DNAZol;;;;;;
+57.7;campo;479,3;1,91;NA ;NA ;DNAZol;;;;;479,3;1,91
+29.1;campo;NA;NA;NA ;NA ;DNAZol;;;;;;
+29.2;campo;1909,5;1,54;NA ;NA ;DNAZol;;;;;1909,5;1,54
+29.3;campo;950,2;1,92;NA ;NA ;DNAZol;;;;;950,2;1,92
+29.4;campo;1186;1,94;NA ;NA ;DNAZol;;;;;1186,0;1,94
+29.5;campo;267,9;2;NA ;NA ;DNAZol;;;;;267,9;2
+29.6;campo;NA;NA;NA ;NA ;DNAZol;;;;;;
+CN.16;negativo;437,3;1,94;424;1,94;COLUNA;;;;;430,7;1,94
+CN.17;negativo;464,9;2;454,3;2;COLUNA;;;;;459,6;2
+CN.18;negativo;679,7;2,1;687,2;2,09;COLUNA;;;;;683,5;2,095
+CN.19;negativo;282;2;265,9;2;COLUNA;;;;;274,0;2
+CN.20;negativo;624,5;2,1;632,5;2,1;COLUNA;;;;;628,5;2,1
+CN.21;negativo;424;2;440,9;2;COLUNA;;;;;432,5;2
+CN.22;negativo;374,2;2,04;371,9;2,03;COLUNA;;;;;373,1;2,035
+CN.23;negativo;476;2,03;492,6;2,03;COLUNA;;;;;484,3;2,03
+CN.24;negativo;352,9;2,05;330,8;2,05;COLUNA;;;;;341,9;2,05
+CN.25;negativo;221,2;1,98;226,2;1,96;COLUNA;;;;;223,7;1,97
+CN.26;negativo;277,9;2;273,3;2;COLUNA;;;;;275,6;2
+CN.27;negativo;249,1;1,86;235,7;1,86;COLUNA;;;;;242,4;1,86
+CN.28;negativo;451,3;2;430,8;2;COLUNA;;;;;441,1;2
+CN.29;negativo;272,9;2;271,9;1,99;COLUNA;;;;;272,4;1,995
+CN.30;negativo;239,7;1,91;215,4;1,9;COLUNA;;;;;227,6;1,905
+CN.31;negativo;471,8;2,04;409,6;2,05;COLUNA;;;;;440,7;2,045
+CN.32;negativo;435,1;2,06;469,9;2,06;COLUNA;;;;;452,5;2,06
+CN.33;negativo;495,6;2,04;941,7;2;COLUNA;;;;;718,7;2,02
+CN.34;negativo;523,8;2,11;496,6;2,11;COLUNA;;;;;510,2;2,11
+CN.35;negativo;732,7;2,03;460,5;2,03;COLUNA;;;;;596,6;2,03

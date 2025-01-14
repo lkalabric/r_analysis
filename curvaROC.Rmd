@@ -9,28 +9,45 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Vamos quebrar o código em partes:
+
+{r setup, include=FALSE}:
+
+{r}: Indica o início de um "chunk" de código R. Um chunk é uma seção isolada de código R dentro do documento R Markdown.
+setup: É um rótulo para esse chunk específico. Ele serve como um identificador e pode ser usado para referenciar esse chunk em outras partes do documento.
+include=FALSE: Essa opção significa que o código dentro desse chunk não será incluído no documento final. Ele é executado, mas o código em si não é visível ao leitor.
+knitr::opts_chunk$set(echo = TRUE):
+
+knitr: É um pacote R que fornece funcionalidades para "knitting" (tricotar) documentos R Markdown, ou seja, para transformar o código e o texto em um documento final formatado.
+opts_chunk$set: Essa função é usada para definir opções globais para todos os chunks de código R no documento.
+echo = TRUE: Essa opção específica indica que o código dentro de cada chunk deve ser exibido no documento final. Ou seja, o leitor poderá ver o código R que gerou os resultados.
+
 ## R Markdown
 
 Este é um documento R Markdown. Markdown é uma sintaxe de formatação simples para criação de documentos HTML, PDF e MS Word. Para mais detalhes sobre o uso do R Markdown, consulte <http://rmarkdown.rstudio.com>.
 
 Ao clicar no botão **Knit**, um documento será gerado, incluindo tanto o conteúdo quanto a saída de quaisquer pedaços de código R incorporados no documento. Você pode incorporar um pedaço de código R assim:
 
-```{r libraries}
+```{r instacao}
 # Instala os pacotes requeridos para o script
-list.of.packages <- c("pROC", "dplyr", "readr", "ggpubr")
+list.of.packages <- c("pROC", "dplyr", "readr", "ggpubr", "caret")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
-
 ```
-Carregando os dados...
+
+Carregando os dados .csv para uma data.frame em R...
 
 ```{r dados}
-# Carregando os dados de um arquivo .csv
-nano1 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/Análise validação dos métodos moleculares 20250113 BF.csv")
+# Carregando os dados de um arquivo .csv na Fiocruz
+# dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/curva_ROC.csv")
+
+# Carregando os dados de um arquivo .csv no laptop ASUS
+dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/curva_ROC.csv")
+
 
 # Para confirmar a classe de uma variável
-# View(nano1)
-class(nano1)
+View(dados)
+class(dados)
 ```
 
 
@@ -39,7 +56,7 @@ Criar o código fonte na linguagem de programação R para analisar o dataframe 
 
 Código gerado:
 
-```{r libraries}
+```{r pROC}
 
 # Carrega os pacotes instalados 
 library(pROC)  # Mostra e analisa curvas ROC
