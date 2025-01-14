@@ -13,7 +13,7 @@
 
 <meta name="date" content="2024-10-07" />
 
-<title>Estudo e aplicações de estatística descritiva em R</title>
+<title>Meu primeiro caderno de anotações escrito em R Markdown</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,8 +350,8 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Estudo e aplicações de estatística
-descritiva em R</h1>
+<h1 class="title toc-ignore">Meu primeiro caderno de anotações escrito
+em R Markdown</h1>
 <h4 class="author">Luciano K. Silva</h4>
 <h4 class="date">2024-10-07</h4>
 
@@ -365,10 +365,45 @@ simples para criação de documentos HTML, PDF e MS Word. Para mais
 detalhes sobre o uso do R Markdown, consulte <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
 <p>Ao clicar no botão <strong>Knit</strong>, um documento será gerado,
 incluindo tanto o conteúdo quanto a saída de quaisquer pedaços de código
-R incorporados no documento. Você pode incorporar um pedaço de código R
-assim:</p>
+R incorporados no documento, denominados “chunks”. Você pode incorporar
+um pedaço de código R assim:</p>
+<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)</code></pre>
+<p>Vamos quebrar o código em partes:</p>
+<p>``` antes e após delimitam o chunk {r setup, include=FALSE}:</p>
+<p>{r}: Indica o início de um “chunk” de código R. Um chunk é uma seção
+isolada de código R dentro do documento R Markdown.</p>
+<p>setup: É um rótulo para esse chunk específico. Ele serve como um
+identificador e pode ser usado para referenciar esse chunk em outras
+partes do documento. Se, o parâmtero “, include=FALSE” for incluído, o
+código dentro desse chunk não será incluído no documento final. Ele é
+executado, mas o código em si não é visível ao leitor:</p>
+<p>knitr::opts_chunk$set(echo = TRUE)</p>
+<p>knitr: É um pacote R que fornece funcionalidades para “knitting”
+(tricotar) documentos R Markdown, ou seja, para transformar o código e o
+texto em um documento final formatado. opts_chunk$set: Essa função é
+usada para definir opções globais para todos os chunks de código R no
+documento. echo = TRUE: Essa opção específica indica que o código dentro
+de cada “chunk” deve ser exibido no documento final. Ou seja, o leitor
+poderá ver o código R que gerou os resultados.</p>
+<p>Podemos utilizar datasets disponivéis pelo R ou por alguns pacotes
+com o “cars” e “pressure” para mostrar exemplos de recursos do arquivo
+de notas R Markdown. Abaixo, seguem dois exemplos de chunks com seus
+respectivos códigos:</p>
+</div>
+<div id="primeiros-comandos-r" class="section level2">
+<h2>Primeiros comandos R</h2>
 <pre class="r"><code># Aqui é um bloco de código
-dado &lt;- summary(cars)</code></pre>
+dado &lt;- summary(cars) # A função summary apresenta estatística básicas de dados numérios, tais como, distribuição, centralidade e dispersão dos dados
+dado</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>O # dentro de um chunk antecede um comentário. Ele pode aparecer no
+ínicio da linha de comando ou em qualquer outro local.</p>
 </div>
 <div id="incluindo-plots" class="section level2">
 <h2>Incluindo Plots</h2>

@@ -1,24 +1,44 @@
 ---
-title: "Estudo e aplicações de estatística descritiva em R"
+title: "Meu primeiro caderno de anotações escrito em R Markdown"
 author: "Luciano K. Silva"
 date: "2024-10-07"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## R Markdown
 
 Este é um documento R Markdown. Markdown é uma sintaxe de formatação simples para criação de documentos HTML, PDF e MS Word. Para mais detalhes sobre o uso do R Markdown, consulte <http://rmarkdown.rstudio.com>.
 
-Ao clicar no botão **Knit**, um documento será gerado, incluindo tanto o conteúdo quanto a saída de quaisquer pedaços de código R incorporados no documento. Você pode incorporar um pedaço de código R assim:
+Ao clicar no botão **Knit**, um documento será gerado, incluindo tanto o conteúdo quanto a saída de quaisquer pedaços de código R incorporados no documento, denominados "chunks". Você pode incorporar um pedaço de código R assim:
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Vamos quebrar o código em partes:
+
+``` antes e após delimitam o chunk {r setup, include=FALSE}:
+
+{r}: Indica o início de um "chunk" de código R. Um chunk é uma seção isolada de código R dentro do documento R Markdown.
+
+setup: É um rótulo para esse chunk específico. Ele serve como um identificador e pode ser usado para referenciar esse chunk em outras partes do documento. Se, o parâmtero ", include=FALSE" for incluído, o código dentro desse chunk não será incluído no documento final. Ele é executado, mas o código em si não é visível ao leitor:
+
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr: É um pacote R que fornece funcionalidades para "knitting" (tricotar) documentos R Markdown, ou seja, para transformar o código e o texto em um documento final formatado.
+opts_chunk$set: Essa função é usada para definir opções globais para todos os chunks de código R no documento.
+echo = TRUE: Essa opção específica indica que o código dentro de cada "chunk" deve ser exibido no documento final. Ou seja, o leitor poderá ver o código R que gerou os resultados.
+
+Podemos utilizar datasets disponivéis pelo R ou por alguns pacotes com o "cars" e "pressure" para mostrar exemplos de recursos do arquivo de notas R Markdown. Abaixo, seguem dois exemplos de chunks com seus respectivos códigos:
+
+## Primeiros comandos R
 
 ```{r cars}
 # Aqui é um bloco de código
-dado <- summary(cars)
+dado <- summary(cars) # A função summary apresenta estatística básicas de dados numérios, tais como, distribuição, centralidade e dispersão dos dados
+dado
 ```
+O # dentro de um chunk antecede um comentário. Ele pode aparecer no ínicio da linha de comando ou em qualquer outro local.
 
 ## Incluindo Plots
 
