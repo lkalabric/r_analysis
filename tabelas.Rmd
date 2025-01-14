@@ -1,0 +1,47 @@
+---
+title: "tabelas"
+author: "Luciano K. Silva"
+date: "2025-01-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Vamos estudar como representar dados do REDCap exportados no formato .csv utilizando bibliotecas R
+
+Instalando os pacotes requeridos:
+
+```{r instacao}
+# Instala os pacotes requeridos para o script
+list.of.packages <- c("dplyr", "readr", "ggpubr")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+
+Carregando os dados .csv obtidos do REDCap diretamente para uma data.frame em R. Nesse caso, podemos usar a função read.csv ao invés de read.csv2. read.csv2 é utilizado apenas para leitura de arquivos .csv vindos do Excel para compatibilizar o ponto decimal "." e o separador ";" automaticamente.
+
+```{r dados}
+# Carregando os dados de um arquivo .csv na Fiocruz
+#dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
+
+# Carregando os dados de um arquivo .csv no laptop ASUS
+dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
+
+# Para confirmar a classe de uma variável
+View(dados)
+class(dados)
+```
+
+Maju, falta você incluir o(s) chunk(s) para uso do pacote para análise dos dados em tabela apresentados no video do Youtube https://www.youtube.com/watch?v=xI8f0kUnmF0
+
+Sucesso!!!
+
+```{r tabela1}
+
+
+
+
+```
+
