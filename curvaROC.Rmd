@@ -5,7 +5,7 @@ date: "2025-01-13"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -35,15 +35,14 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-Carregando os dados .csv para uma data.frame em R...
+Carregando os dados .csv obtidos do Excel diretamente para uma data.frame em R devemos usar a função read.csv2 ao invés de read.csv...
 
 ```{r dados}
 # Carregando os dados de um arquivo .csv na Fiocruz
-# dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/curva_ROC.csv")
+# dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/curva_ROC.csv", sep=",")
 
 # Carregando os dados de um arquivo .csv no laptop ASUS
-dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/curva_ROC.csv")
-
+dados <- read.csv2("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/dados_curvaROC.csv")
 
 # Para confirmar a classe de uma variável
 View(dados)
@@ -57,18 +56,29 @@ Criar o código fonte na linguagem de programação R para analisar o dataframe 
 Código gerado:
 
 ```{r pROC}
-
 # Carrega os pacotes instalados 
 library(pROC)  # Mostra e analisa curvas ROC
 
-# Supondo que seu dataframe 'nano1' já esteja carregado
+# Supondo que seu dataframe 'dados' já esteja carregado
 
+# Análise da a260_media que representa o total de DNA recuperado
 # Criando a curva ROC
-roc_obj <- roc(nano1$controle, nano1$A260.media, levels = c("negativo", "positivo"))
+roc_obj <- roc(dados$controle, dados$a260_media, levels = c("negativo", "positivo"))
 
 # Plotando a curva ROC
 plot(roc_obj, print.auc = TRUE, col = "blue")
 
 # Calculando a área sob a curva (AUC)
 auc(roc_obj)
+
+# Análise da a260_a280_media que representa a pureza do DNA
+# Criando a curva ROC
+roc_obj <- roc(dados$controle, dados$a260_a280_media, levels = c("negativo", "positivo"))
+
+# Plotando a curva ROC
+plot(roc_obj, print.auc = TRUE, col = "blue")
+
+# Calculando a área sob a curva (AUC)
+auc(roc_obj)
+
 ```
