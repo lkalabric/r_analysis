@@ -361,7 +361,7 @@ display: none;
 .csv utilizando bibliotecas R</p>
 <p>Instalando os pacotes requeridos:</p>
 <pre class="r"><code># Instala os pacotes requeridos para o script
-list.of.packages &lt;- c(&quot;dplyr&quot;, &quot;readr&quot;, &quot;ggpubr&quot;)
+list.of.packages &lt;- c(&quot;dplyr&quot;, &quot;gtsummary&quot;)
 new.packages &lt;- list.of.packages[!(list.of.packages %in% installed.packages()[,&quot;Package&quot;])]
 if(length(new.packages)) install.packages(new.packages)</code></pre>
 <p>Carregando os dados .csv obtidos do REDCap diretamente para uma
@@ -370,10 +370,10 @@ read.csv2. read.csv2 é utilizado apenas para leitura de arquivos .csv
 vindos do Excel para compatibilizar o ponto decimal “.” e o separador
 “;” automaticamente.</p>
 <pre class="r"><code># Carregando os dados de um arquivo .csv na Fiocruz
-#dados &lt;- read.csv(&quot;C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv&quot;)
+dados &lt;- read.csv(&quot;C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv&quot;)
 
 # Carregando os dados de um arquivo .csv no laptop ASUS
-dados &lt;- read.csv(&quot;C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv&quot;)
+#dados &lt;- read.csv(&quot;C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv&quot;)
 
 # Para confirmar a classe de uma variável
 View(dados)
@@ -382,6 +382,532 @@ class(dados)</code></pre>
 <p>Maju, falta você incluir o(s) chunk(s) para uso do pacote para
 análise dos dados em tabela apresentados no video do Youtube <a href="https://www.youtube.com/watch?v=xI8f0kUnmF0" class="uri">https://www.youtube.com/watch?v=xI8f0kUnmF0</a></p>
 <p>Sucesso!!!</p>
+<pre class="r"><code>#Carrega o pacote gtsummary
+library(dplyr)</code></pre>
+<pre><code>## 
+## Anexando pacote: &#39;dplyr&#39;</code></pre>
+<pre><code>## Os seguintes objetos são mascarados por &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## Os seguintes objetos são mascarados por &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code># Recodificando os valores da data.frame dados_renomeado
+dados_recodificado &lt;- dados %&gt;%
+  mutate(sexo = recode(sexo, &quot;1&quot; = &quot;Masculino&quot;, &quot;2&quot; = &quot;Feminino&quot;))
+
+dados_recodificado &lt;- dados_recodificado %&gt;%
+  mutate(nat1 = recode(nat1, &quot;1&quot; = &quot;Salvador&quot;, &quot;2&quot; = &quot;Outras localidades&quot;))
+
+# Renomeando os rótulos do data.frame dados
+dados_renomeado &lt;- dados_recodificado %&gt;%
+  rename(&quot;Sexo&quot; = sexo,
+         &quot;Idade&quot; = idade,
+         &quot;Naturalidade&quot; = nat1,
+         &quot;Cor da pele&quot; = cor,
+         &quot;Escolaridade&quot; = escolaridade)
+
+dados_renomeado</code></pre>
+<pre><code>##       id      Sexo Idade       Naturalidade Cor da pele Escolaridade
+## 1    1.1 Masculino    85               &lt;NA&gt;          NA           NA
+## 2    1.2  Feminino    NA               &lt;NA&gt;          NA           NA
+## 3   26.1 Masculino    59 Outras localidades           2            4
+## 4   26.2  Feminino    57 Outras localidades           2            0
+## 5   31.1 Masculino    73 Outras localidades           2            1
+## 6   32.1 Masculino    67 Outras localidades           2            1
+## 7   32.2  Feminino    55           Salvador           3            2
+## 8   34.1 Masculino    55 Outras localidades           2            4
+## 9   34.2 Masculino    34 Outras localidades           3            4
+## 10  34.3 Masculino    28 Outras localidades           2            4
+## 11  34.4 Masculino    34 Outras localidades           3            4
+## 12  52.1 Masculino    57 Outras localidades           2            2
+## 13 100.1 Masculino    53 Outras localidades           2            7
+## 14 100.2 Masculino    NA               &lt;NA&gt;          NA           NA
+## 15 101.1  Feminino    61 Outras localidades           3            4
+## 16 102.1 Masculino    50 Outras localidades           1            1
+## 17 103.1 Masculino    69 Outras localidades           3            0
+## 18 104.1 Masculino    63 Outras localidades           2            1
+## 19 104.2 Masculino    64 Outras localidades           2            1
+## 20 104.3 Masculino    73 Outras localidades           2            0
+## 21 105.1  Feminino    53           Salvador           3            1
+## 22 105.2 Masculino    56 Outras localidades           3            0
+## 23 107.1 Masculino    25 Outras localidades           2            2
+## 24 107.2 Masculino    31 Outras localidades           2            2
+## 25 107.3 Masculino    59 Outras localidades           3            1
+## 26 107.4 Masculino    46 Outras localidades           2            1
+## 27 107.5 Masculino    30           Salvador           3            1
+## 28 107.6 Masculino    38 Outras localidades           1            2
+## 29 107.7 Masculino    27 Outras localidades           3            2
+## 30 107.8 Masculino    25 Outras localidades           2            1
+## 31 107.9 Masculino    20 Outras localidades           3            4</code></pre>
+<pre class="r"><code>#Carrega o pacote gtsummary
+library(gtsummary)</code></pre>
+<pre><code>## Warning: pacote &#39;gtsummary&#39; foi compilado no R versão 4.4.2</code></pre>
+<pre class="r"><code># Tabela corrigida
+tbl_summary(dados_recodificado,
+            label = list(sexo ~ &quot;Sexo&quot;,
+                         idade ~ &quot;Idade&quot;,
+                         nat1 ~ &quot;Naturalidade&quot;,
+                         cor ~ &quot;Cor da pele&quot;,
+                         escolaridade ~ &quot;Escolaridade&quot;),
+            statistic = list(idade ~ &quot;{mean} ({sd})&quot;),
+            digits = list(idade ~ c(1,2)),
+            # no - nunca mostra; always - sempre mostra e ifany - mostra se tiver
+            missing = &quot;no&quot;,
+            sort = list(sexo ~ &quot;frequency&quot;)) %&gt;%
+  bold_labels() %&gt;%
+  italicize_levels()</code></pre>
+<div id="nrqiadfrvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nrqiadfrvl table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#nrqiadfrvl thead, #nrqiadfrvl tbody, #nrqiadfrvl tfoot, #nrqiadfrvl tr, #nrqiadfrvl td, #nrqiadfrvl th {
+border-style: none;
+}
+#nrqiadfrvl p {
+margin: 0;
+padding: 0;
+}
+#nrqiadfrvl .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#nrqiadfrvl .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#nrqiadfrvl .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#nrqiadfrvl .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#nrqiadfrvl .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#nrqiadfrvl .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#nrqiadfrvl .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#nrqiadfrvl .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#nrqiadfrvl .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#nrqiadfrvl .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#nrqiadfrvl .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#nrqiadfrvl .gt_from_md > :first-child {
+margin-top: 0;
+}
+#nrqiadfrvl .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#nrqiadfrvl .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#nrqiadfrvl .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#nrqiadfrvl .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#nrqiadfrvl .gt_row_group_first td {
+border-top-width: 2px;
+}
+#nrqiadfrvl .gt_row_group_first th {
+border-top-width: 2px;
+}
+#nrqiadfrvl .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#nrqiadfrvl .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#nrqiadfrvl .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#nrqiadfrvl .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#nrqiadfrvl .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#nrqiadfrvl .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#nrqiadfrvl .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#nrqiadfrvl .gt_left {
+text-align: left;
+}
+#nrqiadfrvl .gt_center {
+text-align: center;
+}
+#nrqiadfrvl .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#nrqiadfrvl .gt_font_normal {
+font-weight: normal;
+}
+#nrqiadfrvl .gt_font_bold {
+font-weight: bold;
+}
+#nrqiadfrvl .gt_font_italic {
+font-style: italic;
+}
+#nrqiadfrvl .gt_super {
+font-size: 65%;
+}
+#nrqiadfrvl .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#nrqiadfrvl .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#nrqiadfrvl .gt_indent_1 {
+text-indent: 5px;
+}
+#nrqiadfrvl .gt_indent_2 {
+text-indent: 10px;
+}
+#nrqiadfrvl .gt_indent_3 {
+text-indent: 15px;
+}
+#nrqiadfrvl .gt_indent_4 {
+text-indent: 20px;
+}
+#nrqiadfrvl .gt_indent_5 {
+text-indent: 25px;
+}
+#nrqiadfrvl .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#nrqiadfrvl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_0"><span class="gt_from_md"><strong>N = 31</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">id</td>
+<td headers="stat_0" class="gt_row gt_center">102 (34, 107)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Sexo</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Masculino</td>
+<td headers="stat_0" class="gt_row gt_center">26 (84%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Feminino</td>
+<td headers="stat_0" class="gt_row gt_center">5 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Idade</td>
+<td headers="stat_0" class="gt_row gt_center">49.9 (17.30)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Naturalidade</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Outras localidades</td>
+<td headers="stat_0" class="gt_row gt_center">25 (89%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Salvador</td>
+<td headers="stat_0" class="gt_row gt_center">3 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Cor da pele</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    1</td>
+<td headers="stat_0" class="gt_row gt_center">2 (7.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    2</td>
+<td headers="stat_0" class="gt_row gt_center">15 (54%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    3</td>
+<td headers="stat_0" class="gt_row gt_center">11 (39%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Escolaridade</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    0</td>
+<td headers="stat_0" class="gt_row gt_center">4 (14%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    1</td>
+<td headers="stat_0" class="gt_row gt_center">10 (36%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    2</td>
+<td headers="stat_0" class="gt_row gt_center">6 (21%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    4</td>
+<td headers="stat_0" class="gt_row gt_center">7 (25%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    7</td>
+<td headers="stat_0" class="gt_row gt_center">1 (3.6%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Median (Q1, Q3); n (%); Mean (SD)</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<p>IMPORTANTE: Não esquece de atribuir um comentário com Commit, dar
+Push e Fetch no Github Desktop após salvar este arquivo!!!</p>
 
 
 

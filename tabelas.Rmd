@@ -15,7 +15,7 @@ Instalando os pacotes requeridos:
 
 ```{r instacao}
 # Instala os pacotes requeridos para o script
-list.of.packages <- c("dplyr", "readr", "ggpubr")
+list.of.packages <- c("dplyr", "gtsummary")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
@@ -24,10 +24,10 @@ Carregando os dados .csv obtidos do REDCap diretamente para uma data.frame em R.
 
 ```{r dados}
 # Carregando os dados de um arquivo .csv na Fiocruz
-#dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
+dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
 
 # Carregando os dados de um arquivo .csv no laptop ASUS
-dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
+#dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
 
 # Para confirmar a classe de uma variável
 View(dados)
@@ -38,11 +38,50 @@ Maju, falta você incluir o(s) chunk(s) para uso do pacote para análise dos dad
 
 Sucesso!!!
 
-```{r tabela1}
+```{r tabela1_prep}
+#Carrega o pacote gtsummary
+library(dplyr)
 
+# Recodificando os valores da data.frame dados_renomeado
+dados_recodificado <- dados %>%
+  mutate(sexo = recode(sexo, "1" = "Masculino", "2" = "Feminino"))
 
+dados_recodificado <- dados_recodificado %>%
+  mutate(nat1 = recode(nat1, "1" = "Salvador", "2" = "Outras localidades"))
 
+# Renomeando os rótulos do data.frame dados
+dados_renomeado <- dados_recodificado %>%
+  rename("Sexo" = sexo,
+         "Idade" = idade,
+         "Naturalidade" = nat1,
+         "Cor da pele" = cor,
+         "Escolaridade" = escolaridade)
+
+dados_renomeado
 
 ```
+
+
+```{r tabela1_final}
+#Carrega o pacote gtsummary
+library(gtsummary)
+
+# Tabela corrigida
+tbl_summary(dados_recodificado,
+            label = list(sexo ~ "Sexo",
+                         idade ~ "Idade",
+                         nat1 ~ "Naturalidade",
+                         cor ~ "Cor da pele",
+                         escolaridade ~ "Escolaridade"),
+            statistic = list(idade ~ "{mean} ({sd})"),
+            digits = list(idade ~ c(1,2)),
+            # no - nunca mostra; always - sempre mostra e ifany - mostra se tiver
+            missing = "no",
+            sort = list(sexo ~ "frequency")) %>%
+  bold_labels() %>%
+  italicize_levels()
+
+```
+
 IMPORTANTE: Não esquece de atribuir um comentário com Commit, dar Push e Fetch no Github Desktop após salvar este arquivo!!!
 
