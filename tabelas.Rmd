@@ -42,22 +42,24 @@ Sucesso!!!
 #Carrega o pacote gtsummary
 library(dplyr)
 
-# Recodificando os valores da data.frame dados_renomeado
+# Recodificando os valores dos dados da data.frame
 dados_recodificado <- dados %>%
   mutate(sexo = recode(sexo, "1" = "Masculino", "2" = "Feminino"))
 
 dados_recodificado <- dados_recodificado %>%
   mutate(nat1 = recode(nat1, "1" = "Salvador", "2" = "Outras localidades"))
 
-# Renomeando os rótulos do data.frame dados
-dados_renomeado <- dados_recodificado %>%
-  rename("Sexo" = sexo,
-         "Idade" = idade,
-         "Naturalidade" = nat1,
-         "Cor da pele" = cor,
-         "Escolaridade" = escolaridade)
+# Maju, vc precisa recodificar as demais variáveis antes de passar dados_recodificado para a função tbl_summary
 
-dados_renomeado
+# Renomeando os rótulos do data.frame
+# NOTA: Vamos usar o argumento labels da própria função tbl_summarey para fazer esta etapa
+#dados_renomeado <- dados %>%
+#  rename("Sexo" = sexo,
+#         "Idade" = idade,
+#         "Naturalidade" = nat1,
+#         "Cor da pele" = cor,
+#         "Escolaridade" = escolaridade)
+
 
 ```
 

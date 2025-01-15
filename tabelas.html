@@ -392,54 +392,23 @@ library(dplyr)</code></pre>
 <pre><code>## Os seguintes objetos são mascarados por &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code># Recodificando os valores da data.frame dados_renomeado
+<pre class="r"><code># Recodificando os valores dos dados da data.frame
 dados_recodificado &lt;- dados %&gt;%
   mutate(sexo = recode(sexo, &quot;1&quot; = &quot;Masculino&quot;, &quot;2&quot; = &quot;Feminino&quot;))
 
 dados_recodificado &lt;- dados_recodificado %&gt;%
   mutate(nat1 = recode(nat1, &quot;1&quot; = &quot;Salvador&quot;, &quot;2&quot; = &quot;Outras localidades&quot;))
 
-# Renomeando os rótulos do data.frame dados
-dados_renomeado &lt;- dados_recodificado %&gt;%
-  rename(&quot;Sexo&quot; = sexo,
-         &quot;Idade&quot; = idade,
-         &quot;Naturalidade&quot; = nat1,
-         &quot;Cor da pele&quot; = cor,
-         &quot;Escolaridade&quot; = escolaridade)
+# Maju, vc precisa recodificar as demais variáveis antes de passar dados_recodificado para a função tbl_summary
 
-dados_renomeado</code></pre>
-<pre><code>##       id      Sexo Idade       Naturalidade Cor da pele Escolaridade
-## 1    1.1 Masculino    85               &lt;NA&gt;          NA           NA
-## 2    1.2  Feminino    NA               &lt;NA&gt;          NA           NA
-## 3   26.1 Masculino    59 Outras localidades           2            4
-## 4   26.2  Feminino    57 Outras localidades           2            0
-## 5   31.1 Masculino    73 Outras localidades           2            1
-## 6   32.1 Masculino    67 Outras localidades           2            1
-## 7   32.2  Feminino    55           Salvador           3            2
-## 8   34.1 Masculino    55 Outras localidades           2            4
-## 9   34.2 Masculino    34 Outras localidades           3            4
-## 10  34.3 Masculino    28 Outras localidades           2            4
-## 11  34.4 Masculino    34 Outras localidades           3            4
-## 12  52.1 Masculino    57 Outras localidades           2            2
-## 13 100.1 Masculino    53 Outras localidades           2            7
-## 14 100.2 Masculino    NA               &lt;NA&gt;          NA           NA
-## 15 101.1  Feminino    61 Outras localidades           3            4
-## 16 102.1 Masculino    50 Outras localidades           1            1
-## 17 103.1 Masculino    69 Outras localidades           3            0
-## 18 104.1 Masculino    63 Outras localidades           2            1
-## 19 104.2 Masculino    64 Outras localidades           2            1
-## 20 104.3 Masculino    73 Outras localidades           2            0
-## 21 105.1  Feminino    53           Salvador           3            1
-## 22 105.2 Masculino    56 Outras localidades           3            0
-## 23 107.1 Masculino    25 Outras localidades           2            2
-## 24 107.2 Masculino    31 Outras localidades           2            2
-## 25 107.3 Masculino    59 Outras localidades           3            1
-## 26 107.4 Masculino    46 Outras localidades           2            1
-## 27 107.5 Masculino    30           Salvador           3            1
-## 28 107.6 Masculino    38 Outras localidades           1            2
-## 29 107.7 Masculino    27 Outras localidades           3            2
-## 30 107.8 Masculino    25 Outras localidades           2            1
-## 31 107.9 Masculino    20 Outras localidades           3            4</code></pre>
+# Renomeando os rótulos do data.frame
+# NOTA: Vamos usar o argumento labels da própria função tbl_summarey para fazer esta etapa
+#dados_renomeado &lt;- dados %&gt;%
+#  rename(&quot;Sexo&quot; = sexo,
+#         &quot;Idade&quot; = idade,
+#         &quot;Naturalidade&quot; = nat1,
+#         &quot;Cor da pele&quot; = cor,
+#         &quot;Escolaridade&quot; = escolaridade)</code></pre>
 <pre class="r"><code>#Carrega o pacote gtsummary
 library(gtsummary)</code></pre>
 <pre><code>## Warning: pacote &#39;gtsummary&#39; foi compilado no R versão 4.4.2</code></pre>
@@ -457,20 +426,20 @@ tbl_summary(dados_recodificado,
             sort = list(sexo ~ &quot;frequency&quot;)) %&gt;%
   bold_labels() %&gt;%
   italicize_levels()</code></pre>
-<div id="nrqiadfrvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nrqiadfrvl table {
+<div id="kjhhakxrqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kjhhakxrqf table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#nrqiadfrvl thead, #nrqiadfrvl tbody, #nrqiadfrvl tfoot, #nrqiadfrvl tr, #nrqiadfrvl td, #nrqiadfrvl th {
+#kjhhakxrqf thead, #kjhhakxrqf tbody, #kjhhakxrqf tfoot, #kjhhakxrqf tr, #kjhhakxrqf td, #kjhhakxrqf th {
 border-style: none;
 }
-#nrqiadfrvl p {
+#kjhhakxrqf p {
 margin: 0;
 padding: 0;
 }
-#nrqiadfrvl .gt_table {
+#kjhhakxrqf .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -495,11 +464,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_caption {
+#kjhhakxrqf .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#nrqiadfrvl .gt_title {
+#kjhhakxrqf .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -510,7 +479,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#nrqiadfrvl .gt_subtitle {
+#kjhhakxrqf .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -521,7 +490,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#nrqiadfrvl .gt_heading {
+#kjhhakxrqf .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -532,12 +501,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_bottom_border {
+#kjhhakxrqf .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_col_headings {
+#kjhhakxrqf .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -551,7 +520,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_col_heading {
+#kjhhakxrqf .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -570,7 +539,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#nrqiadfrvl .gt_column_spanner_outer {
+#kjhhakxrqf .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -581,13 +550,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#nrqiadfrvl .gt_column_spanner_outer:first-child {
+#kjhhakxrqf .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#nrqiadfrvl .gt_column_spanner_outer:last-child {
+#kjhhakxrqf .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#nrqiadfrvl .gt_column_spanner {
+#kjhhakxrqf .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -598,10 +567,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#nrqiadfrvl .gt_spanner_row {
+#kjhhakxrqf .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#nrqiadfrvl .gt_group_heading {
+#kjhhakxrqf .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -626,7 +595,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#nrqiadfrvl .gt_empty_group_heading {
+#kjhhakxrqf .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -640,13 +609,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#nrqiadfrvl .gt_from_md > :first-child {
+#kjhhakxrqf .gt_from_md > :first-child {
 margin-top: 0;
 }
-#nrqiadfrvl .gt_from_md > :last-child {
+#kjhhakxrqf .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#nrqiadfrvl .gt_row {
+#kjhhakxrqf .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -664,7 +633,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#nrqiadfrvl .gt_stub {
+#kjhhakxrqf .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -676,7 +645,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#nrqiadfrvl .gt_stub_row_group {
+#kjhhakxrqf .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -689,13 +658,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#nrqiadfrvl .gt_row_group_first td {
+#kjhhakxrqf .gt_row_group_first td {
 border-top-width: 2px;
 }
-#nrqiadfrvl .gt_row_group_first th {
+#kjhhakxrqf .gt_row_group_first th {
 border-top-width: 2px;
 }
-#nrqiadfrvl .gt_summary_row {
+#kjhhakxrqf .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -704,14 +673,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#nrqiadfrvl .gt_first_summary_row {
+#kjhhakxrqf .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_first_summary_row.thick {
+#kjhhakxrqf .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#nrqiadfrvl .gt_last_summary_row {
+#kjhhakxrqf .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -720,7 +689,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_grand_summary_row {
+#kjhhakxrqf .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -729,7 +698,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#nrqiadfrvl .gt_first_grand_summary_row {
+#kjhhakxrqf .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -738,7 +707,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_last_grand_summary_row_top {
+#kjhhakxrqf .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -747,10 +716,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_striped {
+#kjhhakxrqf .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#nrqiadfrvl .gt_table_body {
+#kjhhakxrqf .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -758,7 +727,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_footnotes {
+#kjhhakxrqf .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -771,7 +740,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_footnote {
+#kjhhakxrqf .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -779,7 +748,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#nrqiadfrvl .gt_sourcenotes {
+#kjhhakxrqf .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -792,64 +761,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#nrqiadfrvl .gt_sourcenote {
+#kjhhakxrqf .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#nrqiadfrvl .gt_left {
+#kjhhakxrqf .gt_left {
 text-align: left;
 }
-#nrqiadfrvl .gt_center {
+#kjhhakxrqf .gt_center {
 text-align: center;
 }
-#nrqiadfrvl .gt_right {
+#kjhhakxrqf .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#nrqiadfrvl .gt_font_normal {
+#kjhhakxrqf .gt_font_normal {
 font-weight: normal;
 }
-#nrqiadfrvl .gt_font_bold {
+#kjhhakxrqf .gt_font_bold {
 font-weight: bold;
 }
-#nrqiadfrvl .gt_font_italic {
+#kjhhakxrqf .gt_font_italic {
 font-style: italic;
 }
-#nrqiadfrvl .gt_super {
+#kjhhakxrqf .gt_super {
 font-size: 65%;
 }
-#nrqiadfrvl .gt_footnote_marks {
+#kjhhakxrqf .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#nrqiadfrvl .gt_asterisk {
+#kjhhakxrqf .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#nrqiadfrvl .gt_indent_1 {
+#kjhhakxrqf .gt_indent_1 {
 text-indent: 5px;
 }
-#nrqiadfrvl .gt_indent_2 {
+#kjhhakxrqf .gt_indent_2 {
 text-indent: 10px;
 }
-#nrqiadfrvl .gt_indent_3 {
+#kjhhakxrqf .gt_indent_3 {
 text-indent: 15px;
 }
-#nrqiadfrvl .gt_indent_4 {
+#kjhhakxrqf .gt_indent_4 {
 text-indent: 20px;
 }
-#nrqiadfrvl .gt_indent_5 {
+#kjhhakxrqf .gt_indent_5 {
 text-indent: 25px;
 }
-#nrqiadfrvl .katex-display {
+#kjhhakxrqf .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#nrqiadfrvl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kjhhakxrqf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
