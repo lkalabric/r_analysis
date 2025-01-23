@@ -13,7 +13,7 @@
 
 <meta name="date" content="2025-01-14" />
 
-<title>tabelas</title>
+<title>consumo_RM</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,7 +350,7 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">tabelas</h1>
+<h1 class="title toc-ignore">consumo_RM</h1>
 <h4 class="author">Luciano K. Silva</h4>
 <h4 class="date">2025-01-14</h4>
 
@@ -361,7 +361,7 @@ display: none;
 .csv utilizando bibliotecas R</p>
 <p>Instalando os pacotes requeridos:</p>
 <pre class="r"><code># Instala os pacotes requeridos para o script
-list.of.packages &lt;- c(&quot;dplyr&quot;, &quot;gtsummary&quot;)
+list.of.packages &lt;- c(&quot;dplyr&quot;)
 new.packages &lt;- list.of.packages[!(list.of.packages %in% installed.packages()[,&quot;Package&quot;])]
 if(length(new.packages)) install.packages(new.packages)</code></pre>
 <p>Carregando os dados .csv obtidos do REDCap diretamente para uma
@@ -370,20 +370,20 @@ read.csv2. read.csv2 é utilizado apenas para leitura de arquivos .csv
 vindos do Excel para compatibilizar o ponto decimal “.” e o separador
 “;” automaticamente.</p>
 <pre class="r"><code># Carregando os dados de um arquivo .csv na Fiocruz
-dados &lt;- read.csv(&quot;C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv&quot;)
+dados &lt;- read.csv(&quot;C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/consumo_RM.csv&quot;)
 
 # Carregando os dados de um arquivo .csv no laptop ASUS
-#dados &lt;- read.csv(&quot;C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv&quot;)
+#dados &lt;- read.csv(&quot;C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/consumo_RM.csv&quot;)
 
 # Para confirmar a classe de uma variável
 View(dados)
 class(dados)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<p>Maju, falta você incluir o(s) chunk(s) para uso do pacote para
-análise dos dados em tabela apresentados no video do Youtube <a href="https://www.youtube.com/watch?v=xI8f0kUnmF0" class="uri">https://www.youtube.com/watch?v=xI8f0kUnmF0</a></p>
+<p>Rebeca, falta incluir as análises de média por tipo de equipamento,
+linha, estado de conservação, tensão elétrica</p>
 <p>Sucesso!!!</p>
-<pre class="r"><code>#Carrega o pacote gtsummary
-library(dplyr)</code></pre>
+<p>Calculando a média de consumo pelo tipo de equipamento…</p>
+<pre class="r"><code>library(dplyr)</code></pre>
 <pre><code>## 
 ## Anexando pacote: &#39;dplyr&#39;</code></pre>
 <pre><code>## Os seguintes objetos são mascarados por &#39;package:stats&#39;:
@@ -392,491 +392,188 @@ library(dplyr)</code></pre>
 <pre><code>## Os seguintes objetos são mascarados por &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code># Recodificando os valores dos dados da data.frame
-dados_recodificado &lt;- dados %&gt;%
-  mutate(sexo = recode(sexo, &quot;1&quot; = &quot;Masculino&quot;, &quot;2&quot; = &quot;Feminino&quot;))
+<pre class="r"><code># Calculando a frequência de cada tipo de congelador
+frequencia_por_tipo &lt;- dados %&gt;%
+  group_by(tipo_congelador) %&gt;%
+  summarise(frequencia = n())
 
-dados_recodificado &lt;- dados_recodificado %&gt;%
-  mutate(nat1 = recode(nat1, &quot;1&quot; = &quot;Salvador&quot;, &quot;2&quot; = &quot;Outras localidades&quot;))
+# Calculando a média de consumo por tipo de congelador
+medias_por_tipo &lt;- dados %&gt;%
+  group_by(tipo_congelador) %&gt;%
+  summarise(media_consumo30 = mean(consumo30))
 
-# Maju, vc precisa recodificar as demais variáveis antes de passar dados_recodificado para a função tbl_summary
+# Combinando os resultados (opcional)
+resultados &lt;- left_join(frequencia_por_tipo, medias_por_tipo, by = &quot;tipo_congelador&quot;)
 
-# Renomeando os rótulos do data.frame
-# NOTA: Vamos usar o argumento labels da própria função tbl_summarey para fazer esta etapa
-#dados_renomeado &lt;- dados %&gt;%
-#  rename(&quot;Sexo&quot; = sexo,
-#         &quot;Idade&quot; = idade,
-#         &quot;Naturalidade&quot; = nat1,
-#         &quot;Cor da pele&quot; = cor,
-#         &quot;Escolaridade&quot; = escolaridade)</code></pre>
-<pre class="r"><code>#Carrega o pacote gtsummary
-library(gtsummary)</code></pre>
-<pre><code>## Warning: pacote &#39;gtsummary&#39; foi compilado no R versão 4.4.2</code></pre>
-<pre class="r"><code># Tabela corrigida
-tbl_summary(dados_recodificado,
-            label = list(sexo ~ &quot;Sexo&quot;,
-                         idade ~ &quot;Idade&quot;,
-                         nat1 ~ &quot;Naturalidade&quot;,
-                         cor ~ &quot;Cor da pele&quot;,
-                         escolaridade ~ &quot;Escolaridade&quot;),
-            statistic = list(idade ~ &quot;{mean} ({sd})&quot;),
-            digits = list(idade ~ c(1,2)),
-            # no - nunca mostra; always - sempre mostra e ifany - mostra se tiver
-            missing = &quot;no&quot;,
-            sort = list(sexo ~ &quot;frequency&quot;)) %&gt;%
-  bold_labels() %&gt;%
-  italicize_levels()</code></pre>
-<div id="qcndjfppbj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qcndjfppbj table {
-font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-#qcndjfppbj thead, #qcndjfppbj tbody, #qcndjfppbj tfoot, #qcndjfppbj tr, #qcndjfppbj td, #qcndjfppbj th {
-border-style: none;
-}
-#qcndjfppbj p {
-margin: 0;
-padding: 0;
-}
-#qcndjfppbj .gt_table {
-display: table;
-border-collapse: collapse;
-line-height: normal;
-margin-left: auto;
-margin-right: auto;
-color: #333333;
-font-size: 16px;
-font-weight: normal;
-font-style: normal;
-background-color: #FFFFFF;
-width: auto;
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #A8A8A8;
-border-right-style: none;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #A8A8A8;
-border-left-style: none;
-border-left-width: 2px;
-border-left-color: #D3D3D3;
-}
-#qcndjfppbj .gt_caption {
-padding-top: 4px;
-padding-bottom: 4px;
-}
-#qcndjfppbj .gt_title {
-color: #333333;
-font-size: 125%;
-font-weight: initial;
-padding-top: 4px;
-padding-bottom: 4px;
-padding-left: 5px;
-padding-right: 5px;
-border-bottom-color: #FFFFFF;
-border-bottom-width: 0;
-}
-#qcndjfppbj .gt_subtitle {
-color: #333333;
-font-size: 85%;
-font-weight: initial;
-padding-top: 3px;
-padding-bottom: 5px;
-padding-left: 5px;
-padding-right: 5px;
-border-top-color: #FFFFFF;
-border-top-width: 0;
-}
-#qcndjfppbj .gt_heading {
-background-color: #FFFFFF;
-text-align: center;
-border-bottom-color: #FFFFFF;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-}
-#qcndjfppbj .gt_bottom_border {
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-}
-#qcndjfppbj .gt_col_headings {
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-}
-#qcndjfppbj .gt_col_heading {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: normal;
-text-transform: inherit;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-vertical-align: bottom;
-padding-top: 5px;
-padding-bottom: 6px;
-padding-left: 5px;
-padding-right: 5px;
-overflow-x: hidden;
-}
-#qcndjfppbj .gt_column_spanner_outer {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: normal;
-text-transform: inherit;
-padding-top: 0;
-padding-bottom: 0;
-padding-left: 4px;
-padding-right: 4px;
-}
-#qcndjfppbj .gt_column_spanner_outer:first-child {
-padding-left: 0;
-}
-#qcndjfppbj .gt_column_spanner_outer:last-child {
-padding-right: 0;
-}
-#qcndjfppbj .gt_column_spanner {
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-vertical-align: bottom;
-padding-top: 5px;
-padding-bottom: 5px;
-overflow-x: hidden;
-display: inline-block;
-width: 100%;
-}
-#qcndjfppbj .gt_spanner_row {
-border-bottom-style: hidden;
-}
-#qcndjfppbj .gt_group_heading {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-text-transform: inherit;
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-vertical-align: middle;
-text-align: left;
-}
-#qcndjfppbj .gt_empty_group_heading {
-padding: 0.5px;
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-vertical-align: middle;
-}
-#qcndjfppbj .gt_from_md > :first-child {
-margin-top: 0;
-}
-#qcndjfppbj .gt_from_md > :last-child {
-margin-bottom: 0;
-}
-#qcndjfppbj .gt_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-margin: 10px;
-border-top-style: solid;
-border-top-width: 1px;
-border-top-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-vertical-align: middle;
-overflow-x: hidden;
-}
-#qcndjfppbj .gt_stub {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-text-transform: inherit;
-border-right-style: solid;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qcndjfppbj .gt_stub_row_group {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-text-transform: inherit;
-border-right-style: solid;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-padding-left: 5px;
-padding-right: 5px;
-vertical-align: top;
-}
-#qcndjfppbj .gt_row_group_first td {
-border-top-width: 2px;
-}
-#qcndjfppbj .gt_row_group_first th {
-border-top-width: 2px;
-}
-#qcndjfppbj .gt_summary_row {
-color: #333333;
-background-color: #FFFFFF;
-text-transform: inherit;
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qcndjfppbj .gt_first_summary_row {
-border-top-style: solid;
-border-top-color: #D3D3D3;
-}
-#qcndjfppbj .gt_first_summary_row.thick {
-border-top-width: 2px;
-}
-#qcndjfppbj .gt_last_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-}
-#qcndjfppbj .gt_grand_summary_row {
-color: #333333;
-background-color: #FFFFFF;
-text-transform: inherit;
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qcndjfppbj .gt_first_grand_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-border-top-style: double;
-border-top-width: 6px;
-border-top-color: #D3D3D3;
-}
-#qcndjfppbj .gt_last_grand_summary_row_top {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-border-bottom-style: double;
-border-bottom-width: 6px;
-border-bottom-color: #D3D3D3;
-}
-#qcndjfppbj .gt_striped {
-background-color: rgba(128, 128, 128, 0.05);
-}
-#qcndjfppbj .gt_table_body {
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-}
-#qcndjfppbj .gt_footnotes {
-color: #333333;
-background-color: #FFFFFF;
-border-bottom-style: none;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 2px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-}
-#qcndjfppbj .gt_footnote {
-margin: 0px;
-font-size: 90%;
-padding-top: 4px;
-padding-bottom: 4px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qcndjfppbj .gt_sourcenotes {
-color: #333333;
-background-color: #FFFFFF;
-border-bottom-style: none;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 2px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-}
-#qcndjfppbj .gt_sourcenote {
-font-size: 90%;
-padding-top: 4px;
-padding-bottom: 4px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qcndjfppbj .gt_left {
-text-align: left;
-}
-#qcndjfppbj .gt_center {
-text-align: center;
-}
-#qcndjfppbj .gt_right {
-text-align: right;
-font-variant-numeric: tabular-nums;
-}
-#qcndjfppbj .gt_font_normal {
-font-weight: normal;
-}
-#qcndjfppbj .gt_font_bold {
-font-weight: bold;
-}
-#qcndjfppbj .gt_font_italic {
-font-style: italic;
-}
-#qcndjfppbj .gt_super {
-font-size: 65%;
-}
-#qcndjfppbj .gt_footnote_marks {
-font-size: 75%;
-vertical-align: 0.4em;
-position: initial;
-}
-#qcndjfppbj .gt_asterisk {
-font-size: 100%;
-vertical-align: 0;
-}
-#qcndjfppbj .gt_indent_1 {
-text-indent: 5px;
-}
-#qcndjfppbj .gt_indent_2 {
-text-indent: 10px;
-}
-#qcndjfppbj .gt_indent_3 {
-text-indent: 15px;
-}
-#qcndjfppbj .gt_indent_4 {
-text-indent: 20px;
-}
-#qcndjfppbj .gt_indent_5 {
-text-indent: 25px;
-}
-#qcndjfppbj .katex-display {
-display: inline-flex !important;
-margin-bottom: 0.75em !important;
-}
-#qcndjfppbj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-height: 0px !important;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_0"><span class="gt_from_md"><strong>N = 31</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">id</td>
-<td headers="stat_0" class="gt_row gt_center">102 (34, 107)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Sexo</td>
-<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Masculino</td>
-<td headers="stat_0" class="gt_row gt_center">26 (84%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Feminino</td>
-<td headers="stat_0" class="gt_row gt_center">5 (16%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Idade</td>
-<td headers="stat_0" class="gt_row gt_center">49.9 (17.30)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Naturalidade</td>
-<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Outras localidades</td>
-<td headers="stat_0" class="gt_row gt_center">25 (89%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    Salvador</td>
-<td headers="stat_0" class="gt_row gt_center">3 (11%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Cor da pele</td>
-<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    1</td>
-<td headers="stat_0" class="gt_row gt_center">2 (7.1%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    2</td>
-<td headers="stat_0" class="gt_row gt_center">15 (54%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    3</td>
-<td headers="stat_0" class="gt_row gt_center">11 (39%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Escolaridade</td>
-<td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    0</td>
-<td headers="stat_0" class="gt_row gt_center">4 (14%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    1</td>
-<td headers="stat_0" class="gt_row gt_center">10 (36%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    2</td>
-<td headers="stat_0" class="gt_row gt_center">6 (21%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    4</td>
-<td headers="stat_0" class="gt_row gt_center">7 (25%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-style: italic;">    7</td>
-<td headers="stat_0" class="gt_row gt_center">1 (3.6%)</td></tr>
-  </tbody>
-  
-  <tfoot class="gt_footnotes">
-    <tr>
-      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Median (Q1, Q3); n (%); Mean (SD)</span></td>
-    </tr>
-  </tfoot>
-</table>
-</div>
-<p>IMPORTANTE: Não esquece de atribuir um comentário com Commit, dar
-Push e Fetch no Github Desktop após salvar este arquivo!!!</p>
+# Visualizando os resultados
+print(resultados)</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   tipo_congelador frequencia media_consumo30
+##             &lt;int&gt;      &lt;int&gt;           &lt;dbl&gt;
+## 1               1          2           181. 
+## 2               2         10            66.6
+## 3               3          3           180. 
+## 4               4          2           231.</code></pre>
+<p>Calculando a média de consumo pela clásse do equipamento</p>
+<pre class="r"><code>library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e linhadoequipamento
+frequencia_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, linhadoequipamento) %&gt;%
+  summarise(frequencia = n())</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Calculando a média de consumo por cada combinação
+medias_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, linhadoequipamento) %&gt;%
+  summarise(media_consumo30 = mean(consumo30))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Combinando os resultados (opcional)
+resultados &lt;- left_join(frequencia_por_grupo, medias_por_grupo, by = c(&quot;tipo_congelador&quot;, &quot;linhadoequipamento&quot;))
+
+# Visualizando os resultados
+print(resultados)</code></pre>
+<pre><code>## # A tibble: 6 × 4
+## # Groups:   tipo_congelador [4]
+##   tipo_congelador linhadoequipamento frequencia media_consumo30
+##             &lt;int&gt;              &lt;int&gt;      &lt;int&gt;           &lt;dbl&gt;
+## 1               1                  1          2           181. 
+## 2               2                  1          9            68.2
+## 3               2                  2          1            52.7
+## 4               3                  1          1            19.4
+## 5               3                  2          2           261. 
+## 6               4                  2          2           231.</code></pre>
+<p>Calculando a média estratificada pelo estado de conservação…</p>
+<pre class="r"><code>library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e estado
+frequencia_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, estado) %&gt;%
+  summarise(frequencia = n())</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Calculando a média de consumo por cada combinação
+medias_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, estado) %&gt;%
+  summarise(media_consumo30 = mean(consumo30))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Combinando os resultados (opcional)
+resultados &lt;- left_join(frequencia_por_grupo, medias_por_grupo, by = c(&quot;tipo_congelador&quot;, &quot;estado&quot;))
+
+# Visualizando os resultados
+print(resultados)</code></pre>
+<pre><code>## # A tibble: 8 × 4
+## # Groups:   tipo_congelador [4]
+##   tipo_congelador estado frequencia media_consumo30
+##             &lt;int&gt;  &lt;int&gt;      &lt;int&gt;           &lt;dbl&gt;
+## 1               1      1          1            54.9
+## 2               1      2          1           306. 
+## 3               2      1          2            22.0
+## 4               2      2          6            74.4
+## 5               2      3          2            87.9
+## 6               3      2          3           180. 
+## 7               4      1          1           223. 
+## 8               4      3          1           240.</code></pre>
+<p>Calculando a média de consumo pela ocupação…</p>
+<pre class="r"><code>library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e ocupacao
+frequencia_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, ocupacao) %&gt;%
+  summarise(frequencia = n())</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Calculando a média de consumo por cada combinação
+medias_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, ocupacao) %&gt;%
+  summarise(media_consumo30 = mean(consumo30))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Combinando os resultados (opcional)
+resultados &lt;- left_join(frequencia_por_grupo, medias_por_grupo, by = c(&quot;tipo_congelador&quot;, &quot;ocupacao&quot;))
+
+# Visualizando os resultados
+print(resultados)</code></pre>
+<pre><code>## # A tibble: 10 × 4
+## # Groups:   tipo_congelador [4]
+##    tipo_congelador ocupacao frequencia media_consumo30
+##              &lt;int&gt;    &lt;int&gt;      &lt;int&gt;           &lt;dbl&gt;
+##  1               1        2          1           306. 
+##  2               1        5          1            54.9
+##  3               2        3          2           168. 
+##  4               2        4          5            58.2
+##  5               2        5          3            13.3
+##  6               3        3          1            19.4
+##  7               3        4          1           216. 
+##  8               3        5          1           306. 
+##  9               4        3          1           223. 
+## 10               4        4          1           240.</code></pre>
+<p>Calculando a média de consumo pela frequencia de abertura da
+porta…</p>
+<pre class="r"><code>library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e portas
+frequencia_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, portas) %&gt;%
+  summarise(frequencia = n())</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Calculando a média de consumo por cada combinação
+medias_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, portas) %&gt;%
+  summarise(media_consumo30 = mean(consumo30))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Combinando os resultados (opcional)
+resultados &lt;- left_join(frequencia_por_grupo, medias_por_grupo, by = c(&quot;tipo_congelador&quot;, &quot;portas&quot;))
+
+# Visualizando os resultados
+print(resultados)</code></pre>
+<pre><code>## # A tibble: 9 × 4
+## # Groups:   tipo_congelador [4]
+##   tipo_congelador portas frequencia media_consumo30
+##             &lt;int&gt;  &lt;int&gt;      &lt;int&gt;           &lt;dbl&gt;
+## 1               1      1          1            54.9
+## 2               1      2          1           306. 
+## 3               2      1          4            55.2
+## 4               2      2          4            93.4
+## 5               2      3          2            36.1
+## 6               3      1          1           306. 
+## 7               3      2          2           118. 
+## 8               4      2          1           240. 
+## 9               4      3          1           223.</code></pre>
+<p>Calculando a média de consumo pela tensao do equipamento…</p>
+<pre class="r"><code>library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e portas
+frequencia_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, tensao_conectada) %&gt;%
+  summarise(frequencia = n())</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Calculando a média de consumo por cada combinação
+medias_por_grupo &lt;- dados %&gt;%
+  group_by(tipo_congelador, tensao_conectada) %&gt;%
+  summarise(media_consumo30 = mean(consumo30))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;tipo_congelador&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code># Combinando os resultados (opcional)
+resultados &lt;- left_join(frequencia_por_grupo, medias_por_grupo, by = c(&quot;tipo_congelador&quot;, &quot;tensao_conectada&quot;))
+
+# Visualizando os resultados
+print(resultados)</code></pre>
+<pre><code>## # A tibble: 6 × 4
+## # Groups:   tipo_congelador [4]
+##   tipo_congelador tensao_conectada frequencia media_consumo30
+##             &lt;int&gt;            &lt;int&gt;      &lt;int&gt;           &lt;dbl&gt;
+## 1               1                1          2           181. 
+## 2               2                1          7            24.5
+## 3               2                2          3           165. 
+## 4               3                1          2           163. 
+## 5               3                2          1           216. 
+## 6               4                2          2           231.</code></pre>
 
 
 

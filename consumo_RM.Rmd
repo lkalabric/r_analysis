@@ -1,5 +1,5 @@
 ---
-title: "tabelas"
+title: "consumo_RM"
 author: "Luciano K. Silva"
 date: "2025-01-14"
 output: html_document
@@ -62,7 +62,7 @@ print(resultados)
 
 Calculando a média de consumo pela clásse do equipamento
 
-```{r media_tipo}
+```{r media_linhadoequipamento}
 library(dplyr)
 
 # Calculando a frequência de cada combinação de tipo_congelador e linhadoequipamento
@@ -84,7 +84,7 @@ print(resultados)
 
 Calculando a média estratificada pelo estado de conservação...
 
-```{r media_tipo}
+```{r media_estado}
 library(dplyr)
 
 # Calculando a frequência de cada combinação de tipo_congelador e estado
@@ -106,7 +106,7 @@ print(resultados)
 
 Calculando a média de consumo pela ocupação...
 
-```{r media_tipo}
+```{r media_ocupacao}
 library(dplyr)
 
 # Calculando a frequência de cada combinação de tipo_congelador e ocupacao
@@ -128,7 +128,7 @@ print(resultados)
 
 Calculando a média de consumo pela frequencia de abertura da porta...
 
-```{r media_tipo}
+```{r media_portas}
 library(dplyr)
 
 # Calculando a frequência de cada combinação de tipo_congelador e portas
@@ -149,7 +149,7 @@ print(resultados)
 ```
 Calculando a média de consumo pela tensao do equipamento...
 
-```{r media_tipo}
+```{r media_tensao_conectada}
 library(dplyr)
 
 # Calculando a frequência de cada combinação de tipo_congelador e portas
