@@ -1,0 +1,171 @@
+---
+title: "tabelas"
+author: "Luciano K. Silva"
+date: "2025-01-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Vamos estudar como representar dados do REDCap exportados no formato .csv utilizando bibliotecas R
+
+Instalando os pacotes requeridos:
+
+```{r instacao}
+# Instala os pacotes requeridos para o script
+list.of.packages <- c("dplyr")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+
+Carregando os dados .csv obtidos do REDCap diretamente para uma data.frame em R. Nesse caso, podemos usar a função read.csv ao invés de read.csv2. read.csv2 é utilizado apenas para leitura de arquivos .csv vindos do Excel para compatibilizar o ponto decimal "." e o separador ";" automaticamente.
+
+```{r dados}
+# Carregando os dados de um arquivo .csv na Fiocruz
+dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/consumo_RM.csv")
+
+# Carregando os dados de um arquivo .csv no laptop ASUS
+#dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/consumo_RM.csv")
+
+# Para confirmar a classe de uma variável
+View(dados)
+class(dados)
+```
+
+Rebeca, falta incluir as análises de média por tipo de equipamento, linha, estado de conservação, tensão elétrica
+
+Sucesso!!!
+
+Calculando a média de consumo pelo tipo de equipamento...
+
+```{r media_tipo}
+library(dplyr)
+
+# Calculando a frequência de cada tipo de congelador
+frequencia_por_tipo <- dados %>%
+  group_by(tipo_congelador) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo por tipo de congelador
+medias_por_tipo <- dados %>%
+  group_by(tipo_congelador) %>%
+  summarise(media_consumo30 = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados <- left_join(frequencia_por_tipo, medias_por_tipo, by = "tipo_congelador")
+
+# Visualizando os resultados
+print(resultados)
+```
+
+Calculando a média de consumo pela clásse do equipamento
+
+```{r media_tipo}
+library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e linhadoequipamento
+frequencia_por_grupo <- dados %>%
+  group_by(tipo_congelador, linhadoequipamento) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo por cada combinação
+medias_por_grupo <- dados %>%
+  group_by(tipo_congelador, linhadoequipamento) %>%
+  summarise(media_consumo30 = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados <- left_join(frequencia_por_grupo, medias_por_grupo, by = c("tipo_congelador", "linhadoequipamento"))
+
+# Visualizando os resultados
+print(resultados)
+```
+
+Calculando a média estratificada pelo estado de conservação...
+
+```{r media_tipo}
+library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e estado
+frequencia_por_grupo <- dados %>%
+  group_by(tipo_congelador, estado) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo por cada combinação
+medias_por_grupo <- dados %>%
+  group_by(tipo_congelador, estado) %>%
+  summarise(media_consumo30 = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados <- left_join(frequencia_por_grupo, medias_por_grupo, by = c("tipo_congelador", "estado"))
+
+# Visualizando os resultados
+print(resultados)
+```
+
+Calculando a média de consumo pela ocupação...
+
+```{r media_tipo}
+library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e ocupacao
+frequencia_por_grupo <- dados %>%
+  group_by(tipo_congelador, ocupacao) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo por cada combinação
+medias_por_grupo <- dados %>%
+  group_by(tipo_congelador, ocupacao) %>%
+  summarise(media_consumo30 = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados <- left_join(frequencia_por_grupo, medias_por_grupo, by = c("tipo_congelador", "ocupacao"))
+
+# Visualizando os resultados
+print(resultados)
+```
+
+Calculando a média de consumo pela frequencia de abertura da porta...
+
+```{r media_tipo}
+library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e portas
+frequencia_por_grupo <- dados %>%
+  group_by(tipo_congelador, portas) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo por cada combinação
+medias_por_grupo <- dados %>%
+  group_by(tipo_congelador, portas) %>%
+  summarise(media_consumo30 = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados <- left_join(frequencia_por_grupo, medias_por_grupo, by = c("tipo_congelador", "portas"))
+
+# Visualizando os resultados
+print(resultados)
+```
+Calculando a média de consumo pela tensao do equipamento...
+
+```{r media_tipo}
+library(dplyr)
+
+# Calculando a frequência de cada combinação de tipo_congelador e portas
+frequencia_por_grupo <- dados %>%
+  group_by(tipo_congelador, tensao_conectada) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo por cada combinação
+medias_por_grupo <- dados %>%
+  group_by(tipo_congelador, tensao_conectada) %>%
+  summarise(media_consumo30 = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados <- left_join(frequencia_por_grupo, medias_por_grupo, by = c("tipo_congelador", "tensao_conectada"))
+
+# Visualizando os resultados
+print(resultados)
+```
+
