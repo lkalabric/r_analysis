@@ -39,10 +39,10 @@ Carregando os dados .csv obtidos do Excel diretamente para uma data.frame em R d
 
 ```{r dados}
 # Carregando os dados de um arquivo .csv na Fiocruz
-# dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/curva_ROC.csv", sep=",")
+# dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/extracao_ROC.csv", sep=",")
 
 # Carregando os dados de um arquivo .csv no laptop ASUS
-dados <- read.csv2("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/dados_curvaROC.csv")
+dados <- read.csv2("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/extracao_curvaROC.csv")
 
 # Para confirmar a classe de uma variável
 View(dados)

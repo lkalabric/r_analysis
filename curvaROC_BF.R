@@ -9,8 +9,11 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 
 # Carregando os dados .csv obtidos do Excel diretamente para uma data.frame em R devemos usar a função read.csv2 ao invés de read.csv...
-# Carregando os dados de um arquivo .csv na pasta datasets
-dados <- read.csv2("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/dados_curvaROC.csv")
+# Carregando os dados do arquivo .csv da pasta datasetns do notebook Asus
+dados <- read.csv2("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/extracao_curvaROC.csv")
+
+# Carregando os dados do arquivo .csv da pasta datasetns do desktop Professor
+dados <- read.csv2("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/extracao_curvaROC.csv")
 
 # Para confirmar a classe de uma variável
 View(dados)
