@@ -61,22 +61,24 @@ exp(mean(log(tabela1$smovosq), na.rm = TRUE))
 exp(mean(log(tabela1$smovosq_prev), na.rm = TRUE))  # Inclui os resultados do piloto
 
 # Análise estratificada utilizando a função subset - Exemplo
-sm_idade_menor30<-subset(tabela1, idade<30)
-sm_idade<-table(sm_idade_menor30$sm)
+sm_idade_menor21<-subset(tabela1, idade<21)
+sm_idade<-table(sm_idade_menor21$sm_prev)
 sm_idade
-mean(sm_idade_menor30$smovosq, na.rm = TRUE)
-sd(sm_idade_menor30$smovosq, na.rm = TRUE)
-exp(mean(log(sm_idade_menor30$smovosq), na.rm = TRUE))
-sm_idade_maior30<-subset(tabela1, idade>=30)
-mean(sm_idade_maior30$smovosq, na.rm = TRUE)
-sd(sm_idade_maior30$smovosq, na.rm = TRUE)
-exp(mean(log(sm_idade_maior30$smovosq), na.rm = TRUE))
+mean(sm_idade_menor21$smovosq, na.rm = TRUE)
+sd(sm_idade_menor21$smovosq, na.rm = TRUE)
+exp(mean(log(sm_idade_menor21$smovosq), na.rm = TRUE))
+sm_idade_maior21<-subset(tabela1, idade>=21)
+sm_idade<-table(sm_idade_maior21$sm_prev)
+sm_idade
+mean(sm_idade_maior21$smovosq, na.rm = TRUE)
+sd(sm_idade_maior21$smovosq, na.rm = TRUE)
+exp(mean(log(sm_idade_maior21$smovosq), na.rm = TRUE))
 
 ###
 ### Análise Urban Schisto - Tabela 2
 ###
 # Carregando os dados de um arquivo .csv
-tabela2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1 - All.csv")
+tabela2 <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2014- Mitermayer Esquistossomose urbana/Produção/Publicações/2023 Artigo Urban Schisto/Tabela 1&2 - All.csv")
 
 # Frequencia de uma variável qualitativa ou categórica - Exemplo
 participants_study <- table(tabela2$study)
@@ -109,6 +111,11 @@ print(stu_data)
 stu_data = table(tabela2$esgoto_ind,tabela2$sm_prev)    # Inclui os resultados dos pilotos
 print(stu_data)
 # Calcular o chi-quadrado no EpiInfo
+
+
+
+
+
 
 # Análise de médias
 # Link: http://www.sthda.com/english/wiki/comparing-means-in-r
@@ -286,3 +293,5 @@ participants_sm <- table(sm_by_studygroup$faixaetaria, sm_by_studygroup$sm)
 participants_sm
 participants_sm_prev <- table(sm_by_studygroup$faixaetaria, sm_by_studygroup$sm_prev)
 participants_sm_prev
+
+
