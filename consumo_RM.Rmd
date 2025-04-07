@@ -34,11 +34,81 @@ View(dados)
 class(dados)
 ```
 
-Rebeca, falta incluir as análises de média por tipo de equipamento, linha, estado de conservação, tensão elétrica
 
-Sucesso!!!
+Calculando a média de consumo por tipo_congelador
 
-Calculando a média de consumo do subset refrigerador duplex pelo tipo de equipamento, linha, etc...
+
+```{r media_tipo_congelador}
+library(dplyr)
+
+# Calculando a frequência dos equipamentos
+frequencia <- dados %>%
+  group_by(tipo_congelador) %>%
+  summarise(frequencia = n())
+
+# Calculando a média de consumo teórico por linha
+consumo_teorico <- dados %>%
+  group_by(tipo_congelador) %>%
+  summarise(media_consumo_teorico = mean(consumo_calculado))
+
+# Calculando a média de consumo medido por linha
+consumo_medido <- dados %>%
+  group_by(tipo_congelador) %>%
+  summarise(media_consumo_medido = mean(consumo30))
+
+# Combinando os resultados (opcional)
+resultados_inicial <- left_join(frequencia, consumo_teorico,  by = "tipo_congelador")
+resultados_final <- merge(resultados_inicial, consumo_medido,  by = "tipo_congelador")
+
+# Visualizando os resultados
+print(resultados_final)
+
+# Faz um teste ANOVA para comparar as médias
+# ANOVA é apropriado para comparar médias de mais de dois grupos
+resultado_anova <- aov(consumo30 ~ tipo_congelador, data = dados)
+print("Resultado do teste ANOVA:")
+summary(resultado_anova)
+
+# Se o ANOVA for significativo, faz testes post-hoc (Tukey) para comparar pares de médias
+# Testes post-hoc são feitos para determinar quais grupos são significativamente diferentes entre si
+# Correção: Garante que estamos extraindo um único valor p do summary do ANOVA
+p_value <- summary(resultado_anova)[[1]][["Pr(>F)"]][1] # Pega o primeiro valor p da tabela
+
+if (p_value < 0.05) { # Verifica se o valor p do ANOVA é significativo (0.05 é um limiar comum)
+  teste_tukey <- TukeyHSD(resultado_anova)
+  print("Teste de Tukey (comparações pairwise):")
+  print(teste_tukey)
+} else {
+  print("ANOVA não foi significativo, não há necessidade de testes post-hoc.")
+}
+
+# Se a variável possuir apenas duas classe, recomenda-se utilizar o test t de Student
+# Realize o teste t de Student para amostras independentes
+# A fórmula valor ~ classe especifica que você quer comparar os valores da coluna 'valor' entre os grupos definidos pela coluna 'classe'
+teste_t <- t.test(consumo30 ~ linhadoequipamento, data = dados)
+
+# Imprima os resultados do teste t
+print(teste_t)
+
+
+# Gerar um boxplot para visualizar a distribuição do consumo por tipo de equipamento
+boxplot(consumo30 ~ tipo_congelador, data = dados,
+        main = "Comparação do Consumo por Tipo de Equipamento",
+        xlab = "Tipo de Equipamento",
+        ylab = "Consumo")
+
+# Realizar o teste de Kruskal-Wallis
+teste_kruskal_wallis <- kruskal.test(consumo30 ~ tipo_congelador, data = dados)
+
+# Exibir os resultados do teste de Kruskal-Wallis
+print("\nResultados do Teste de Kruskal-Wallis:")
+print(teste_kruskal_wallis)
+
+```
+
+
+
+Calculando a média de consumo do subset refrigerador duplex pelo linhadoequipamento, eficiencia, estadi, tensao_conectada, climatizada, ocupacao, portas (colunas do data.frame dados).
 
 
 ```{r media_coluna}
