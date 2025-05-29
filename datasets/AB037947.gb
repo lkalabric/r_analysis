@@ -1,0 +1,71 @@
+LOCUS       AB037947                1672 bp    RNA     circular VRL 21-SEP-2001
+DEFINITION  Hepatitis D virus genomic RNA, complete genome, isolate:VnzD8375.
+ACCESSION   AB037947
+VERSION     AB037947.1
+KEYWORDS    HDAg; small hepatitis D antigen.
+SOURCE      Hepatitis delta virus
+  ORGANISM  Hepatitis delta virus
+            Viruses; Ribozyviria; Kolmioviridae; Deltavirus.
+REFERENCE   1
+  AUTHORS   Nakano,T., Shapiro,C.N., Hadler,S.C., Casey,J.L., Mizokami,M.,
+            Orito,E. and Robertson,B.H.
+  TITLE     Characterization of hepatitis D virus genotype III among Yucpa
+            Indians in Venezuela
+  JOURNAL   J. Gen. Virol. 82 (PT 9), 2183-2189 (2001)
+   PUBMED   11514728
+REFERENCE   2  (bases 1 to 1672)
+  AUTHORS   Nakano,T.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (03-FEB-2000) Tatsunori Nakano, Centers for Disease
+            Control and Prevention, Hepatitis Branch; 1600 Clifton Rd. NE,
+            Atlanta, Georgia 30333, USA (E-mail:tcn3@cdc.gov,
+            Tel:1-404-639-2335, Fax:1-404-639-1563)
+FEATURES             Location/Qualifiers
+     source          1..1672
+                     /organism="Hepatitis delta virus"
+                     /mol_type="genomic RNA"
+                     /isolate="VnzD8375"
+                     /db_xref="taxon:12475"
+                     /geo_loc_name="Venezuela"
+     gene            complement(1007..1591)
+                     /gene="HDAg"
+     CDS             complement(1007..1591)
+                     /gene="HDAg"
+                     /codon_start=1
+                     /product="small hepatitis D antigen"
+                     /protein_id="BAB68379.1"
+                     /translation="MSQPDARPGSKAREEALEQWVEERKKKRIAEKELRRINKKIKKL
+                     EDENPWLGNIVGMLRKKKDEEGGPPAKRPRREDMEIDSTPGRKSKARGFTDQERRDHR
+                     RRKALENKKKQLAGGGKNLSREEEEELRRLARDDDERERRVAGPRPGGVNPMDGPPRG
+                     APGGGFVPSLQGVPESPFSRTGEGIDIRGTQQFP"
+ORIGIN      
+        1 tgggccgctt ccggcaagag gggccgaaag tgtgaaggga gagaccgctc cgagagttgg
+       61 gagaagaaag agagcgaatg tgtccggagg gaacccccaa gctttcaaca gaggaagaga
+      121 gcaagataga ggagcccccg tgacgctggc agcatcgcgg actgggagaa gagaggcgaa
+      181 gaaaagaagg ggagtccccg atcgaatgtc cataggcaga gaaacctctg gagtcctcta
+      241 gaccgcaagg aggaaattac cagcaggggg tgatccaccc ggagatgagc ggacaagcca
+      301 catccagagg accccttcag cgaacagaag accctggtac cgggggggaa taggccatag
+      361 tacgagggga gatgctagga gtcgggggaa gccagaacga ctgggaaagg aaagaaagca
+      421 acggggctag ctgccgggtg ttccatccat gggatcggtg ccgagtgagg cttatcccgg
+      481 ggggattgcc tcggccccct ccctaacacg ggagtctcgg gccccctccc aggaatggag
+      541 acggggggaa atcgaccggg tcccgcagaa cccgatggag tcccccgcca tcccctgacg
+      601 gagaaaactg gtcccgatag gggcacccac aataggatgg caggagggga ctgcgggtcc
+      661 gtcgttccat ccttttctta ccttgtggcc ggcatggccc cagcctcctc gctggcgccg
+      721 gctgggcaac gatccgaggg gactgtccct ctcgagaatc ggcaaatggg gcccctcgct
+      781 cgtatctccg agaggagacg agaaggaggt ggatctccct ttgccatccg aggggattgc
+      841 gtcctcctta cggatgccca ggtcggaccg cgaggaggtg gagatcccat gccgacccga
+      901 agaggaaagg aggacacgga cgacaaaccg taagttctac tgccctttat tgttgggtgc
+      961 accctgggac ccagtaatac ccggggggag gcggggtaaa cccatactat gggaactgct
+     1021 gggttcctcg gatgtcgatc ccctctcccg ttcgggaaaa gggggactcc ggaactccct
+     1081 gcaggctggg gacgaagccc ccaccgggcg ctcccctcgg cgggccgtcc attgggttca
+     1141 cacccccagg ccgcgggccg gctactcttc tttctctttc gtcgtcatcc ctggccagcc
+     1201 tccggagttc ctcttcttcc tctcggctga ggttcttccc ccctccggcc agttgcttct
+     1261 tcttgttctc gagggccttc cttcttctgt ggtcccgcct ctcctggtcg gtgaaccccc
+     1321 tggctttgga tttcctccca ggtgtagaat caatctccat gtcctctcgc ctgggcctct
+     1381 tcgccggggg tcctccctct tcgtccttct tctttctcaa cattccgacg atgtttccca
+     1441 gccaggggtt ttcatcctca agtttcttga tcttcttgtt gattcgccgg agctccttct
+     1501 cggctattcg ctttttcttc ctttcctcta cccactgctc gagggcctcc tccctcgcct
+     1561 tcgagccggg tcttgcatcg ggttggctca tcctgagacc ggggagcttc gacgatctct
+     1621 tgtctctcct gaaggaggaa ggagctctcg aacgctctcc cgaccgctcg ga
+//
+
