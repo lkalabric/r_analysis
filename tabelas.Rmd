@@ -24,10 +24,10 @@ Carregando os dados .csv obtidos do REDCap diretamente para uma data.frame em R.
 
 ```{r dados}
 # Carregando os dados de um arquivo .csv na Fiocruz
-#dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
+dados <- read.csv("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
 
 # Carregando os dados de um arquivo .csv no laptop ASUS
-dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
+#dados <- read.csv("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets/tabela1_MP.csv")
 
 # Para confirmar a classe de uma variável
 View(dados)

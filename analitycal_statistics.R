@@ -72,3 +72,4 @@ cat("\nAnálise Multivariada:\n")
 print(summary(modelo))
 cat("\nOdds Ratio Ajustado:\n")
 print(or_ajustado)
+
