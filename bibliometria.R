@@ -28,8 +28,10 @@ library(bibliometrix)   ### load bibliometrix package
 install.packages("remotes")         
 remotes::install_github("massimoaria/bibliometrix")
 
-setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
-file <- "LKS_savedrecs.bib"
+setwd("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
+#setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
+file <- "works.bib"
+#file <- "LKS_savedrecs.bib"
 #file <- "https://www.bibliometrix.org/datasets/savedrecs.bib"
 
 M <- convert2df(file = file, dbsource = "isi", format = "bibtex")
@@ -38,11 +40,11 @@ M <- convert2df(file = file, dbsource = "isi", format = "bibtex")
 # Carregue os arquivos
 #setwd("C:/Users/kalab/OneDrive - FIOCRUZ/GitHub/r_analysis/datasets")
 #file1 <- "LKS_savedrecs.bib"
-# file2 <- "C:/Users/danie/OneDrive/0 - ROTINAS R/1 - Bibliometria/501_1000.txt"
-# file3 <- "C:/Users/danie/OneDrive/0 - ROTINAS R/1 - Bibliometria/1001_1468.txt"
+#file2 <- "C:/Users/danie/OneDrive/0 - ROTINAS R/1 - Bibliometria/501_1000.txt"
+#file3 <- "C:/Users/danie/OneDrive/0 - ROTINAS R/1 - Bibliometria/1001_1468.txt"
 # Junte eles
 #es.file <- c(file1, file2, file3)
-# E converta a base:
+# e converta a base:
 #M <- convert2df(file = es.file, dbsource = "wos", format = "plaintext")
 
 results <- biblioAnalysis(M, sep = ";")
