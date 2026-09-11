@@ -1,9 +1,12 @@
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
+
 BiocManager::install("Biostrings")
+BiocManager::install("pwalign")
 
 library(Biostrings)
+library(pwalign)
 
 # 1. Configura o diretório de trabalho
 setwd("C:/Users/Luciano Kalabric/Downloads")

@@ -113,11 +113,11 @@ get_metadata <- function(acc_number) {
 # --- PROCESSAMENTO DO ARQUIVO DE ENTRADA ---
 
 # 1. Configura o diretório de trabalho
-setwd("C:/Users/luciano.kalabric/OneDrive - FIOCRUZ/Projetos/2025 Kalabric - HDV/Dados da pesquisa/Refseq/Genbank")
+setwd("C:/Users/Luciano Kalabric/Downloads")
 
 # 2. Caminho do seu arquivo contendo a lista de acessos
 # (O arquivo deve conter um número de acesso por linha, ex: NC_001653)
-arquivo_entrada <- "HDV_4272_sequences_protein.list"
+arquivo_entrada <- "acc.list"
 
 # 3. Ler a lista de acessos
 # 'read_lines' remove espaços em branco e linhas vazias automaticamente
@@ -135,6 +135,6 @@ df_resultados <- map_df(acessos, get_metadata)
 print(df_resultados)
 
 # 6. Salvar o resultado final em uma tabela CSV
-write_csv(df_resultados, "HDV_4272_sequences_protein_metadados.csv")
+write_csv(df_resultados, "acc_metadados.csv")
 cat("\nProcesso concluído! Arquivo salvo como 'HDV_4272_sequences_protein_metadados.csv'.\n")
 
